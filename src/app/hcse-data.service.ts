@@ -51,7 +51,9 @@ export class HcseDataService {
     const fname = "article_database.json";
     if (await this.isFileCached(fname)) {
       let data = await this.getCachedFile(fname);
+
       this.article_ratings = JSON.parse(await data.text());
+      console.log(this.article_ratings.length + " articles found.");
     } else {
       this.http.get<RatingIdPair[]>('/assets/' + fname).subscribe((data) => {
         this.article_ratings = data;
@@ -69,13 +71,15 @@ export class HcseDataService {
   }
 
   async load_keyword_dictionary() {
-    const fname = "article_database.json";
+    const fname = "rating_database.json";
     if (await this.isFileCached(fname)) {
       let data = await this.getCachedFile(fname);
       let data_text = await data.text();
       let obj = JSON.parse(data_text) as RatingFile;
       this.hallmarks = obj.hallmarks;
+      console.log(this.hallmarks.length + " hallmarks found.");
       this.keyword_ratings = obj.rating_output;
+      console.log(this.keyword_ratings.length + " keywords found.");
     } else {
       this.http.get<RatingFile>('/assets/' + fname).subscribe((data) => {
         this.keyword_ratings = data.rating_output;
