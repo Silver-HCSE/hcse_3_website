@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HcseDataService } from './hcse-data.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'hcse_website';
+  constructor(private data_service: HcseDataService) {
+    this.data_service.initialize();
+  }
 }
