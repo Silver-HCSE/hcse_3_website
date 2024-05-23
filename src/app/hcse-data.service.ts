@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Injectable, WritableSignal, Signal, signal, computed } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { openDB } from 'idb';
 const DATABASE_NAME = 'HCSEFileCache';
-class RatingIdPair {
 
-  public i: String = "";
+class RatingIdPair {
+  public i: string = "";
   public r: number[] = [];
 }
 
@@ -14,12 +14,16 @@ class RatingFile {
 }
 
 class HallmarkDescription {
-  public title: String = "";
-  public description: String = "";
+  public title: string = "";
+  public description: string = "";
+}
+
+class KeywordDictionary {
+ [key: string]: number[];
 }
 
 class KeywordRating {
-  public keyword: String = "";
+  public keyword: string = "";
   public rating: number[] = [];
 }
 
@@ -27,19 +31,43 @@ class KeywordRating {
   providedIn: 'root'
 })
 export class HcseDataService {
-  dbIsReady: boolean;
-  dbIsLoading: boolean;
-  db: any;
-  keyword_ratings: KeywordRating[];
-  article_ratings: RatingIdPair[];
-  hallmarks: HallmarkDescription[];
+  dbIsReady: boolean = false;
+  dbIsLoading: boolean = false;
+  db: any = {};
+  keyword_ratings: WritableSignal<KeywordDictionary> = signal({});
+  article_ratings: WritableSignal<RatingIdPair[]> = signal([]);
+  hallmarks: WritableSignal<HallmarkDescription[]> = signal([]);
+  are_keywords_loading: Signal<boolean> = computed(() => this.n_keywords() == 0);
+  are_articles_loading: Signal<boolean> = computed(() => this.n_articles() == 0);
+  n_articles: Signal<number> = computed(() => this.article_ratings().length);
+  n_hallmarks:  Signal<number> = computed(() => this.hallmarks().length);
+  n_keywords:  Signal<number> = computed(() => Object.keys(this.keyword_ratings()).length);
 
   constructor(private http: HttpClient) {
-    this.dbIsLoading = false;
-    this.dbIsReady = false;
-    this.hallmarks = [];
-    this.article_ratings = [];
-    this.keyword_ratings = [];
+  }
+
+  public get_keyword_rating(keyword: string): KeywordRating {
+    let ret: {keyword: string, rating: number[]} = {
+      keyword, rating: []
+    }
+
+    if(this.are_keywords_loading()) {
+      return ret
+    } else {
+      const r = this.keyword_ratings()[keyword];
+      if (!r) return ret;
+      ret.rating = r;
+    }
+    return ret;
+
+  }
+
+  keyword_ratings_to_dictionary( input: KeywordRating[]) : KeywordDictionary {
+    let ret: KeywordDictionary = {};
+    input.forEach((k) => {
+      ret[k.keyword] = k.rating;
+      });
+      return ret;
   }
 
   async initialize() {
@@ -51,13 +79,14 @@ export class HcseDataService {
     const fname = "article_database.json";
     if (await this.isFileCached(fname)) {
       let data = await this.getCachedFile(fname);
-
-      this.article_ratings = JSON.parse(await data.text());
-      console.log(this.article_ratings.length + " articles found.");
+      this.article_ratings.set(JSON.parse(await data.text()));
+      console.log(this.article_ratings().length + " articles found.");
     } else {
       this.http.get<RatingIdPair[]>('/assets/' + fname).subscribe((data) => {
-        this.article_ratings = data;
+        this.article_ratings.set(data);
         this.cacheFile(fname, this.json_to_blob(data));
+      console.log(this.article_ratings().length + " articles found.");
+
       });
     }
   }
@@ -76,14 +105,14 @@ export class HcseDataService {
       let data = await this.getCachedFile(fname);
       let data_text = await data.text();
       let obj = JSON.parse(data_text) as RatingFile;
-      this.hallmarks = obj.hallmarks;
-      console.log(this.hallmarks.length + " hallmarks found.");
-      this.keyword_ratings = obj.rating_output;
-      console.log(this.keyword_ratings.length + " keywords found.");
+      this.hallmarks.set(obj.hallmarks);
+      console.log(this.n_hallmarks() + " hallmarks found.");
+      this.keyword_ratings.set(this.keyword_ratings_to_dictionary(obj.rating_output));
+      console.log(this.n_keywords() + " keywords found.");
     } else {
       this.http.get<RatingFile>('/assets/' + fname).subscribe((data) => {
-        this.keyword_ratings = data.rating_output;
-        this.hallmarks = data.hallmarks;
+        this.keyword_ratings.set(this.keyword_ratings_to_dictionary(data.rating_output));
+        this.hallmarks.set(data.hallmarks);
         this.cacheFile(fname, this.json_to_blob(data));
       });
     }

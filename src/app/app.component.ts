@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HcseDataService } from './hcse-data.service';
 
 @Component({
@@ -6,9 +6,12 @@ import { HcseDataService } from './hcse-data.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent  implements OnInit {
   title = 'hcse_website';
-  constructor(private data_service: HcseDataService) {
-    this.data_service.initialize();
+  constructor(public data_service: HcseDataService) {
+  }
+
+  async ngOnInit() {
+    await this.data_service.initialize();
   }
 }
