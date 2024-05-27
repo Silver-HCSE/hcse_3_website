@@ -15,6 +15,10 @@ class RatingFile {
 
 class HallmarkDescription {
   public title: string = "";
+  public h: number = 0;
+  public s: number = 0;
+  public l: number = 0;
+  public hsl_string: string =  "hsl(0, 0%, 0%)";
   public description: string = "";
 }
 
@@ -99,6 +103,18 @@ export class HcseDataService {
     return blob;
   }
 
+  set_hallmark_colors() {
+    let old = this.hallmarks();
+    for ( let i = 0; i < old.length; i++) {
+      old[i].h = Math.floor(i * 360 / old.length);
+      old[i].s = 100;
+      old[i].l = 50;
+      old[i].hsl_string = "hsl(" + old[i].h + ", " + old[i].s + "%, " + old[i].l + "%);";
+    }
+    this.hallmarks.set(old);
+    console.log(old);
+  }
+
   async load_keyword_dictionary() {
     const fname = "rating_database.json";
     if (await this.isFileCached(fname)) {
@@ -109,11 +125,13 @@ export class HcseDataService {
       console.log(this.n_hallmarks() + " hallmarks found.");
       this.keyword_ratings.set(this.keyword_ratings_to_dictionary(obj.rating_output));
       console.log(this.n_keywords() + " keywords found.");
+      this.set_hallmark_colors();
     } else {
       this.http.get<RatingFile>('/assets/' + fname).subscribe((data) => {
         this.keyword_ratings.set(this.keyword_ratings_to_dictionary(data.rating_output));
         this.hallmarks.set(data.hallmarks);
         this.cacheFile(fname, this.json_to_blob(data));
+        this.set_hallmark_colors();
       });
     }
   }
