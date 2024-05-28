@@ -4,6 +4,7 @@ import { HcseDataService } from './hcse-data.service';
 import { NgDompurifySanitizer } from "@tinkoff/ng-dompurify";
 import { TuiRootModule, TuiDialogModule, TuiAlertModule, TUI_SANITIZER } from "@taiga-ui/core";
 import { CommonModule } from '@angular/common';
+import { KeywordRatingComponent } from './keyword-rating/keyword-rating.component';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,8 @@ import { CommonModule } from '@angular/common';
     CommonModule,
     TuiRootModule,
     TuiDialogModule,
-    TuiAlertModule],
+    TuiAlertModule,
+    KeywordRatingComponent],
   providers: [{ provide: TUI_SANITIZER, useClass: NgDompurifySanitizer }],
   standalone: true,
 })
