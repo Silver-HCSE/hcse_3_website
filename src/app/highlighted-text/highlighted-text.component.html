@@ -1,0 +1,7 @@
+@for (s of sections; track s.index) {
+@if (s.is_pure) {
+{{s.content}}
+} @else {
+<tui-tag [value]="s.content"></tui-tag>
+}
+}

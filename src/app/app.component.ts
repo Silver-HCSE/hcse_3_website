@@ -5,6 +5,10 @@ import { NgDompurifySanitizer } from "@tinkoff/ng-dompurify";
 import { TuiRootModule, TuiDialogModule, TuiAlertModule, TUI_SANITIZER } from "@taiga-ui/core";
 import { CommonModule } from '@angular/common';
 import { KeywordRatingComponent } from './keyword-rating/keyword-rating.component';
+import { HighlightPipe } from './highlight.pipe';
+import { TuiTagModule } from '@taiga-ui/kit';
+import { DomSanitizer } from '@angular/platform-browser';
+import { HighlightedTextComponent } from './highlighted-text/highlighted-text.component';
 
 @Component({
   selector: 'app-root',
@@ -13,15 +17,17 @@ import { KeywordRatingComponent } from './keyword-rating/keyword-rating.componen
   imports: [
     CommonModule,
     TuiRootModule,
+    TuiTagModule,
     TuiDialogModule,
     TuiAlertModule,
+    HighlightedTextComponent,
     KeywordRatingComponent],
   providers: [{ provide: TUI_SANITIZER, useClass: NgDompurifySanitizer }],
   standalone: true,
 })
 export class AppComponent implements OnInit {
-  title = 'hcse_website';
-  constructor(public data_service: HcseDataService) {
+
+  constructor(public data_service: HcseDataService, public dom: DomSanitizer) {
   }
 
   async ngOnInit() {

@@ -18,12 +18,13 @@ class HallmarkDescription {
   public h: number = 0;
   public s: number = 0;
   public l: number = 0;
-  public hsl_string: string =  "hsl(0, 0%, 0%)";
+  public hsl_string: string = "hsl(0, 0%, 0%)";
   public description: string = "";
+  public keywords: string[] = [];
 }
 
 class KeywordDictionary {
- [key: string]: number[];
+  [key: string]: number[];
 }
 
 class KeywordRating {
@@ -44,18 +45,18 @@ export class HcseDataService {
   are_keywords_loading: Signal<boolean> = computed(() => this.n_keywords() == 0);
   are_articles_loading: Signal<boolean> = computed(() => this.n_articles() == 0);
   n_articles: Signal<number> = computed(() => this.article_ratings().length);
-  n_hallmarks:  Signal<number> = computed(() => this.hallmarks().length);
-  n_keywords:  Signal<number> = computed(() => Object.keys(this.keyword_ratings()).length);
+  n_hallmarks: Signal<number> = computed(() => this.hallmarks().length);
+  n_keywords: Signal<number> = computed(() => Object.keys(this.keyword_ratings()).length);
 
   constructor(private http: HttpClient) {
   }
 
   public get_keyword_rating(keyword: string): KeywordRating {
-    let ret: {keyword: string, rating: number[]} = {
+    let ret: { keyword: string, rating: number[] } = {
       keyword, rating: []
     }
 
-    if(this.are_keywords_loading()) {
+    if (this.are_keywords_loading()) {
       return ret
     } else {
       const r = this.keyword_ratings()[keyword];
@@ -66,17 +67,17 @@ export class HcseDataService {
 
   }
 
-  keyword_ratings_to_dictionary( input: KeywordRating[]) : KeywordDictionary {
+  keyword_ratings_to_dictionary(input: KeywordRating[]): KeywordDictionary {
     let ret: KeywordDictionary = {};
     input.forEach((k) => {
       ret[k.keyword] = k.rating;
-      });
-      return ret;
+    });
+    return ret;
   }
 
   async initialize() {
-    await this.load_publication_database();
     await this.load_keyword_dictionary();
+    await this.load_publication_database();
   }
 
   async load_publication_database() {
@@ -89,12 +90,11 @@ export class HcseDataService {
       this.http.get<RatingIdPair[]>('/assets/' + fname).subscribe((data) => {
         this.article_ratings.set(data);
         this.cacheFile(fname, this.json_to_blob(data));
-      console.log(this.article_ratings().length + " articles found.");
+        console.log(this.article_ratings().length + " articles found.");
 
       });
     }
   }
-
 
   json_to_blob(data: any): Blob {
     const str = JSON.stringify(data);
@@ -103,16 +103,16 @@ export class HcseDataService {
     return blob;
   }
 
-  set_hallmark_colors() {
-    let old = this.hallmarks();
-    for ( let i = 0; i < old.length; i++) {
-      old[i].h = Math.floor(i * 360 / old.length);
-      old[i].s = 100;
-      old[i].l = 50;
-      old[i].hsl_string = "hsl(" + old[i].h + ", " + old[i].s + "%, " + old[i].l + "%);";
+  complete_hallmark_descriptions(input: HallmarkDescription[]): HallmarkDescription[] {
+    let ret = JSON.parse(JSON.stringify(input)) as HallmarkDescription[];
+    for (let i = 0; i < ret.length; i++) {
+      ret[i].h = Math.floor(i * 36);
+      ret[i].s = 100;
+      ret[i].l = 50;
+      ret[i].hsl_string = "hsl(" + ret[i].h + ", " + ret[i].s + "%, " + ret[i].l + "%);";
+      ret[i].keywords = this.get_keywords_for_text(ret[i].description);
     }
-    this.hallmarks.set(old);
-    console.log(old);
+    return ret;
   }
 
   async load_keyword_dictionary() {
@@ -121,19 +121,37 @@ export class HcseDataService {
       let data = await this.getCachedFile(fname);
       let data_text = await data.text();
       let obj = JSON.parse(data_text) as RatingFile;
-      this.hallmarks.set(obj.hallmarks);
-      console.log(this.n_hallmarks() + " hallmarks found.");
       this.keyword_ratings.set(this.keyword_ratings_to_dictionary(obj.rating_output));
       console.log(this.n_keywords() + " keywords found.");
-      this.set_hallmark_colors();
+      this.hallmarks.set(this.complete_hallmark_descriptions(obj.hallmarks));
+      console.log(this.n_hallmarks() + " hallmarks found.");
     } else {
       this.http.get<RatingFile>('/assets/' + fname).subscribe((data) => {
         this.keyword_ratings.set(this.keyword_ratings_to_dictionary(data.rating_output));
-        this.hallmarks.set(data.hallmarks);
+        this.hallmarks.set(this.complete_hallmark_descriptions(data.hallmarks));
         this.cacheFile(fname, this.json_to_blob(data));
-        this.set_hallmark_colors();
       });
     }
+  }
+
+  public get_keywords_for_text(text: string): string[] {
+    let ret: string[] = [];
+    const words = this.split_input_into_possible_keywords(text);
+    words.forEach(w => {
+      if (this.keyword_ratings()[w]) {
+        ret.push(w);
+      }
+    });
+    return ret;
+  }
+
+  private split_input_into_possible_keywords(text: string): string[] {
+    let cleared = text.replace(/[.?,;()!]/g, ' ');
+    cleared = cleared.toLowerCase();
+    let words = cleared.split(/\s+/).filter(word => word.length > 4);
+    words.sort();
+    words = Array.from(new Set(words));
+    return words;
   }
 
   public async prepareDatabase() {
