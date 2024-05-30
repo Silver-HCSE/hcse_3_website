@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { TuiTagModule } from '@taiga-ui/kit';
 import { HcseDataService } from '../hcse-data.service';
+import { TuiNavigationModule } from '@taiga-ui/experimental';
 
 class section {
   is_pure: boolean = true;
@@ -12,7 +13,7 @@ class section {
   selector: 'app-highlighted-text',
   standalone: true,
   imports: [
-    TuiTagModule],
+    TuiTagModule, TuiNavigationModule],
   templateUrl: './highlighted-text.component.html',
   styleUrl: './highlighted-text.component.scss'
 })

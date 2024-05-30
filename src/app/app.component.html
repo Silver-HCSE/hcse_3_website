@@ -1,10 +1,48 @@
-<keyword-rating [rating]="[10,20,30,40,50,60,70,80,90,100]" [keyword]="'Test'"></keyword-rating>
-
-@if ( data_service.are_keywords_loading() ) {
-<div> Loading </div>
-} @else {
-
-<div class="font-bold"> {{data_service.hallmarks()[0].keywords}}</div>
-
-<app-highlighted-text [text]="data_service.hallmarks()[0].description"></app-highlighted-text>
-}
+<app-header />
+<div [style.display]="'flex'" class="v-full">
+  <aside [tuiNavigationAside]="expanded">
+    <header>
+      <button iconLeft="tuiIconHome" tuiButton>
+        <tui-icon icon="tuiIconHome" />
+      </button>
+    </header>
+    <button iconLeft="tuiIconSearch" tuiButton>
+      <tui-icon icon="tuiIconSearch" />
+    </button>
+    <tui-icon icon="tuiIconBook" />
+    <button tuiButton>
+      <tui-icon icon="tuiIconBook" />
+    </button>
+    <a iconLeft="tuiIconUsers" routerLink="/experimental/navigation" routerLinkActive="active" tuiAppearance="flat"
+      tuiButton>
+      Groups
+    </a>
+    <tui-expand [expanded]="expanded">
+      <button tuiButton>Account</button>
+      <button tuiButton>Notifications</button>
+      <button tuiButton>Privacy</button>
+    </tui-expand>
+    <button iconLeft="tuiIconHeart" tuiButton>
+      <span tuiFade>By default ellipsis is used but you can use fade too</span>
+    </button>
+    <hr />
+    <button iconLeft="tuiIconPlus" tuiButton>
+      Add
+    </button>
+    <footer>
+      <button iconLeft="tuiIconStar" tuiButton>
+        Favorites
+      </button>
+      <button tuiButton [iconLeft]="expanded ? 'tuiIconChevronLeft' : 'tuiIconChevronRight'"
+        (click)="expanded = !expanded">
+        Collapse
+      </button>
+    </footer>
+  </aside>
+  <main tuiNavigationMain class="pt-8">
+    <tui-scrollbar>
+      <app-highlighted-text [text]="data_service.hallmarks()[0].description"></app-highlighted-text>
+      <router-outlet />
+    </tui-scrollbar>
+  </main>
+</div>
