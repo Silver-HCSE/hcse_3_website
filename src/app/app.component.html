@@ -1,5 +1,5 @@
 <app-header />
-<div [style.display]="'flex'" class="v-full">
+<div [style.display]="'flex'" style="height: calc(100% - 48px);">
   <aside [tuiNavigationAside]="expanded">
     <header>
       <button tuiButton routerLink="home">
@@ -26,8 +26,8 @@
       </button>
     </footer>
   </aside>
-  <main tuiNavigationMain class="pt-8">
-    <tui-scrollbar>
+  <main tuiNavigationMain class="pt-8" style="height: 100%">
+    <tui-scrollbar style="height: 100%">
       <router-outlet />
     </tui-scrollbar>
   </main>
