@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { HcseDataService } from '../hcse-data.service';
+import { Observable } from 'rxjs';
+import { PubmedArticle } from '../util';
 
 @Component({
   selector: 'app-paper',
@@ -7,6 +10,16 @@ import { Component } from '@angular/core';
   templateUrl: './paper.component.html',
   styleUrl: './paper.component.scss'
 })
-export class PaperComponent {
+export class PaperComponent implements OnInit {
+  @Input() id: string = '';
+  article?: Observable<PubmedArticle>;
+
+  constructor(private data_service: HcseDataService) { }
+
+  ngOnInit(): void {
+    if (this.id !== '') {
+      this.article = this.data_service.fetchArticle(this.id);
+    }
+  }
 
 }

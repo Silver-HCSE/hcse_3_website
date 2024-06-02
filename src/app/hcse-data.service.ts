@@ -1,36 +1,10 @@
 import { Injectable, WritableSignal, Signal, signal, computed } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { openDB } from 'idb';
+import { HallmarkDescription, KeywordDictionary, KeywordRating, PubmedArticle, RatingFile, RatingIdPair, euclideanDistance, json_to_blob, keyword_ratings_to_dictionary, norm_vector, split_input_into_possible_keywords } from './util';
+import { Observable, map } from 'rxjs';
 const DATABASE_NAME = 'HCSEFileCache';
 
-class RatingIdPair {
-  public i: string = "";
-  public r: number[] = [];
-}
-
-class RatingFile {
-  public hallmarks: HallmarkDescription[] = [];
-  public rating_output: KeywordRating[] = [];
-}
-
-class HallmarkDescription {
-  public title: string = "";
-  public h: number = 0;
-  public s: number = 0;
-  public l: number = 0;
-  public hsl_string: string = "hsl(0, 0%, 0%)";
-  public description: string = "";
-  public keywords: string[] = [];
-}
-
-class KeywordDictionary {
-  [key: string]: number[];
-}
-
-class KeywordRating {
-  public keyword: string = "";
-  public rating: number[] = [];
-}
 
 @Injectable({
   providedIn: 'root'
@@ -48,14 +22,14 @@ export class HcseDataService {
   n_hallmarks: Signal<number> = computed(() => this.hallmarks().length);
   n_keywords: Signal<number> = computed(() => Object.keys(this.keyword_ratings()).length);
 
-  constructor(private http: HttpClient) {
-  }
+  private baseUrl = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi';
+
+  constructor(private http: HttpClient) { }
 
   public get_keyword_rating(keyword: string): KeywordRating {
     let ret: { keyword: string, rating: number[] } = {
-      keyword, rating: []
+      keyword, rating: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     }
-
     if (this.are_keywords_loading()) {
       return ret
     } else {
@@ -64,20 +38,17 @@ export class HcseDataService {
       ret.rating = r;
     }
     return ret;
-
-  }
-
-  keyword_ratings_to_dictionary(input: KeywordRating[]): KeywordDictionary {
-    let ret: KeywordDictionary = {};
-    input.forEach((k) => {
-      ret[k.keyword] = k.rating;
-    });
-    return ret;
   }
 
   async initialize() {
     await this.load_keyword_dictionary();
     await this.load_publication_database();
+  }
+
+  initialize_for_test_framework(articles: RatingIdPair[], keywords: RatingFile) {
+    this.article_ratings.set(articles);
+    this.keyword_ratings.set(keyword_ratings_to_dictionary(keywords.rating_output));
+    this.hallmarks.set(keywords.hallmarks);
   }
 
   async load_publication_database() {
@@ -89,18 +60,10 @@ export class HcseDataService {
     } else {
       this.http.get<RatingIdPair[]>('/assets/' + fname).subscribe((data) => {
         this.article_ratings.set(data);
-        this.cacheFile(fname, this.json_to_blob(data));
+        this.cacheFile(fname, json_to_blob(data));
         console.log(this.article_ratings().length + " articles found.");
-
       });
     }
-  }
-
-  json_to_blob(data: any): Blob {
-    const str = JSON.stringify(data);
-    const bytes = new TextEncoder().encode(str);
-    const blob = new Blob([bytes], { type: "application/json;charset=utf-8" });
-    return blob;
   }
 
   complete_hallmark_descriptions(input: HallmarkDescription[]): HallmarkDescription[] {
@@ -121,22 +84,22 @@ export class HcseDataService {
       let data = await this.getCachedFile(fname);
       let data_text = await data.text();
       let obj = JSON.parse(data_text) as RatingFile;
-      this.keyword_ratings.set(this.keyword_ratings_to_dictionary(obj.rating_output));
+      this.keyword_ratings.set(keyword_ratings_to_dictionary(obj.rating_output));
       console.log(this.n_keywords() + " keywords found.");
       this.hallmarks.set(this.complete_hallmark_descriptions(obj.hallmarks));
       console.log(this.n_hallmarks() + " hallmarks found.");
     } else {
       this.http.get<RatingFile>('/assets/' + fname).subscribe((data) => {
-        this.keyword_ratings.set(this.keyword_ratings_to_dictionary(data.rating_output));
+        this.keyword_ratings.set(keyword_ratings_to_dictionary(data.rating_output));
         this.hallmarks.set(this.complete_hallmark_descriptions(data.hallmarks));
-        this.cacheFile(fname, this.json_to_blob(data));
+        this.cacheFile(fname, json_to_blob(data));
       });
     }
   }
 
   public get_keywords_for_text(text: string): string[] {
     let ret: string[] = [];
-    const words = this.split_input_into_possible_keywords(text);
+    const words = split_input_into_possible_keywords(text);
     words.forEach(w => {
       if (this.keyword_ratings()[w]) {
         ret.push(w);
@@ -145,14 +108,18 @@ export class HcseDataService {
     return ret;
   }
 
-  private split_input_into_possible_keywords(text: string): string[] {
-    let cleared = text.replace(/[.?,;()!]/g, ' ');
-    cleared = cleared.toLowerCase();
-    let words = cleared.split(/\s+/).filter(word => word.length > 4);
-    words.sort();
-    words = Array.from(new Set(words));
-    return words;
+  public get_rating_for_text(text: string): number[] {
+    const keywords = split_input_into_possible_keywords(text, false);
+    let rating = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    for (let word in keywords) {
+      const keyword_rating: KeywordRating = this.get_keyword_rating(word);
+      for (let i = 0; i < 10; i++) {
+        rating[i] += keyword_rating.rating[i];
+      }
+    }
+    return norm_vector(rating);
   }
+
 
   public async prepareDatabase() {
     if (this.dbIsReady) {
@@ -203,4 +170,67 @@ export class HcseDataService {
     return new Blob([result], { type: "application/json" });
   }
 
+  public findClosestObjects(inputVector: number[], page: number, pageSize: number): { id: string, vector: number[], distance: number }[] {
+    if (inputVector.length !== 10) {
+      throw new Error('Input vector must have 10 elements');
+    }
+
+    const distances = Object.entries(this.article_ratings()).map(([id, rating]) => ({
+      id,
+      vector: rating.r,
+      distance: euclideanDistance(rating.r, inputVector)
+    }));
+    distances.sort((a, b) => a.distance - b.distance);
+    const startIndex = (page - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+    return distances.slice(startIndex, endIndex);
+  }
+
+  public findClosestObjectsForSearchTerm(searchString: string, page: number, pageSize: number): { id: string, vector: number[], distance: number }[] {
+    const rating = this.get_rating_for_text(searchString);
+    return this.findClosestObjects(rating, page, pageSize);
+  }
+
+  fetchArticle(pmcid: string): Observable<PubmedArticle> {
+    const params = new HttpParams()
+      .set('db', 'pmc')
+      .set('id', pmcid)
+      .set('retmode', 'xml');
+
+    return this.http.get(this.baseUrl, { params, responseType: 'text' }).pipe(
+      map(response => this.parseXml(response))
+    );
+  }
+
+  private parseXml(xmlString: string): PubmedArticle {
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(xmlString, 'application/xml');
+    const article: PubmedArticle = {
+      title: this.getTextContent(xmlDoc, 'title'),
+      abstract: this.getTextContent(xmlDoc, 'abstract'),
+      authors: this.getAuthorList(xmlDoc),
+      journal: this.getTextContent(xmlDoc, 'journal-title'),
+      pubDate: this.getTextContent(xmlDoc, 'pub-date')
+    };
+    return article;
+  }
+
+  private getTextContent(xmlDoc: Document, tagName: string): string {
+    const element = xmlDoc.getElementsByTagName(tagName)[0];
+    return element ? element.textContent || '' : '';
+  }
+
+  private getAuthorList(xmlDoc: Document): string[] {
+    const authorElements = xmlDoc.getElementsByTagName('author');
+    const authors: string[] = [];
+    for (let i = 0; i < authorElements.length; i++) {
+      let temp_element = authorElements[i].getElementsByTagName('last-name')[0];
+      const lastName = temp_element ? temp_element.textContent || '' : '';
+      temp_element = authorElements[i].getElementsByTagName('first-name')[0];
+      const firstName = temp_element ? temp_element.textContent || '' : '';
+      authors.push(`${firstName} ${lastName}`);
+    }
+    return authors;
+  }
 }
+

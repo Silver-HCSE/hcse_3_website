@@ -1,1 +1,10 @@
-<p>search works!</p>
+<input [(ngModel)]="searchTerm" />
+<button (onClick)="startSearch()">Search</button>
+
+@if(results.length == 0) {
+<b> No search results </b>
+} @else {
+	@for(res in results) {
+	<app-paper [id]="res.id" />
+	}
+	}
