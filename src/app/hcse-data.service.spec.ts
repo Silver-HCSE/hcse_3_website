@@ -13,4 +13,7 @@ describe('HcseDataService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should compute norms properly', () => {
+    expect(service.norm
 });

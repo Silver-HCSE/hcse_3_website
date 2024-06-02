@@ -1,8 +1,9 @@
 import { Injectable, WritableSignal, Signal, signal, computed } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { openDB } from 'idb';
-import { HallmarkDescription, KeywordDictionary, KeywordRating, PubmedArticle, RatingFile, RatingIdPair, euclideanDistance, json_to_blob, keyword_ratings_to_dictionary, norm_vector, split_input_into_possible_keywords } from './util';
+import { ArticleListItem, HallmarkDescription, KeywordDictionary, KeywordRating, PubmedArticle, RatingFile, RatingIdPair, euclideanDistance, json_to_blob, keyword_ratings_to_dictionary, norm_vector, split_input_into_possible_keywords } from './util';
 import { Observable, map } from 'rxjs';
+import { ArticleListCollection } from './article-list';
 const DATABASE_NAME = 'HCSEFileCache';
 
 
@@ -26,14 +27,18 @@ export class HcseDataService {
 
   constructor(private http: HttpClient) { }
 
-  public get_keyword_rating(keyword: string): KeywordRating {
+  public get_keyword_rating(in_keyword: string): KeywordRating {
+    const keyword = in_keyword.trim();
     let ret: { keyword: string, rating: number[] } = {
       keyword, rating: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     }
     if (this.are_keywords_loading()) {
-      return ret
+      return ret;
     } else {
-      const r = this.keyword_ratings()[keyword];
+      if (this.keyword_ratings().hasOwnProperty(keyword)) {
+        console.log("found");
+      }
+      const r = (this.keyword_ratings())[keyword];
       if (!r) return ret;
       ret.rating = r;
     }
@@ -111,7 +116,7 @@ export class HcseDataService {
   public get_rating_for_text(text: string): number[] {
     const keywords = split_input_into_possible_keywords(text, false);
     let rating = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    for (let word in keywords) {
+    for (let word of keywords) {
       const keyword_rating: KeywordRating = this.get_keyword_rating(word);
       for (let i = 0; i < 10; i++) {
         rating[i] += keyword_rating.rating[i];
@@ -170,63 +175,85 @@ export class HcseDataService {
     return new Blob([result], { type: "application/json" });
   }
 
-  public findClosestObjects(inputVector: number[], page: number, pageSize: number): { id: string, vector: number[], distance: number }[] {
-    if (inputVector.length !== 10) {
-      throw new Error('Input vector must have 10 elements');
+  public findClosestObjects(inputVector: number[]): ArticleListCollection {
+    let ret: ArticleListCollection = new ArticleListCollection();
+    for (let article of this.article_ratings()) {
+      let ali: ArticleListItem = {
+        id: article.i,
+        rating: article.r,
+        distance: euclideanDistance(article.r, inputVector),
+      };
+      ret.add(ali);
+    }
+    return ret;
+  }
+
+  public findClosestObjectsForSearchTerm(searchString: string): ArticleListCollection {
+    console.log("Starting search");
+    const rating = this.get_rating_for_text(searchString);
+    console.log("Found rating " + rating);
+    let ret = this.findClosestObjects(rating);
+    console.log(ret);
+    return ret;
+  }
+
+  fetchArticles(ids: string[]): Observable<PubmedArticle[]> {
+    let id_string = ids[0];
+    for (let i = 1; i < ids.length; i++) {
+      id_string += "," + ids[i];
     }
 
-    const distances = Object.entries(this.article_ratings()).map(([id, rating]) => ({
-      id,
-      vector: rating.r,
-      distance: euclideanDistance(rating.r, inputVector)
-    }));
-    distances.sort((a, b) => a.distance - b.distance);
-    const startIndex = (page - 1) * pageSize;
-    const endIndex = startIndex + pageSize;
-    return distances.slice(startIndex, endIndex);
-  }
-
-  public findClosestObjectsForSearchTerm(searchString: string, page: number, pageSize: number): { id: string, vector: number[], distance: number }[] {
-    const rating = this.get_rating_for_text(searchString);
-    return this.findClosestObjects(rating, page, pageSize);
-  }
-
-  fetchArticle(pmcid: string): Observable<PubmedArticle> {
     const params = new HttpParams()
       .set('db', 'pmc')
-      .set('id', pmcid)
+      .set('id', id_string)
       .set('retmode', 'xml');
 
     return this.http.get(this.baseUrl, { params, responseType: 'text' }).pipe(
-      map(response => this.parseXml(response))
+      map(response => this.parseXml(response, ids))
     );
   }
 
-  private parseXml(xmlString: string): PubmedArticle {
+  private parseXml(xmlString: string, ids: string[]): PubmedArticle[] {
     const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(xmlString, 'application/xml');
+
+    console.log(xmlString);
+    const article_elements = xmlDoc.getElementsByTagName("article");
+    console.log(article_elements.length);
+    let ret: PubmedArticle[] = [];
+    for (let i = 0; i < article_elements.length; i++) {
+      let art = this.parseArticle(article_elements.item(i)!);
+      art.id = ids[i];
+      ret.push(art);
+    }
+    console.log(ret);
+    return ret;
+  }
+
+  private parseArticle(xmlDoc: Element): PubmedArticle {
     const article: PubmedArticle = {
-      title: this.getTextContent(xmlDoc, 'title'),
+      title: this.getTextContent(xmlDoc, 'article-title'),
       abstract: this.getTextContent(xmlDoc, 'abstract'),
       authors: this.getAuthorList(xmlDoc),
       journal: this.getTextContent(xmlDoc, 'journal-title'),
-      pubDate: this.getTextContent(xmlDoc, 'pub-date')
+      pubDate: this.getTextContent(xmlDoc, 'pub-date'),
+      id: this.getTextContent(xmlDoc, 'PMID')
     };
     return article;
   }
 
-  private getTextContent(xmlDoc: Document, tagName: string): string {
+  private getTextContent(xmlDoc: Element, tagName: string): string {
     const element = xmlDoc.getElementsByTagName(tagName)[0];
     return element ? element.textContent || '' : '';
   }
 
-  private getAuthorList(xmlDoc: Document): string[] {
-    const authorElements = xmlDoc.getElementsByTagName('author');
+  private getAuthorList(xmlDoc: Element): string[] {
+    const authorElements = xmlDoc.getElementsByTagName('contrib');
     const authors: string[] = [];
     for (let i = 0; i < authorElements.length; i++) {
-      let temp_element = authorElements[i].getElementsByTagName('last-name')[0];
+      let temp_element = authorElements[i].getElementsByTagName('surname')[0];
       const lastName = temp_element ? temp_element.textContent || '' : '';
-      temp_element = authorElements[i].getElementsByTagName('first-name')[0];
+      temp_element = authorElements[i].getElementsByTagName('given-names')[0];
       const firstName = temp_element ? temp_element.textContent || '' : '';
       authors.push(`${firstName} ${lastName}`);
     }

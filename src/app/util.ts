@@ -4,6 +4,13 @@ export interface PubmedArticle {
   authors: string[];
   journal: string;
   pubDate: string;
+  id: string;
+}
+
+export class ArticleListItem {
+  id: string = "";
+  rating: number[] = [];
+  distance?: number;
 }
 
 export class RatingIdPair {
@@ -50,6 +57,7 @@ export function split_input_into_possible_keywords(text: string, deduplicate: bo
   let cleared = text.replace(/[.?,;()!]/g, ' ');
   cleared = cleared.toLowerCase();
   let words = cleared.split(/\s+/).filter(word => word.length > 4);
+  words = words.map((w) => w.trim());
   words.sort();
   if (deduplicate) {
     words = Array.from(new Set(words));
@@ -67,7 +75,7 @@ export function json_to_blob(data: any): Blob {
 export function keyword_ratings_to_dictionary(input: KeywordRating[]): KeywordDictionary {
   let ret: KeywordDictionary = {};
   input.forEach((k) => {
-    ret[k.keyword] = k.rating;
+    ret[k.keyword.trim()] = k.rating;
   });
   return ret;
 }

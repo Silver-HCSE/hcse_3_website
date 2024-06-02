@@ -2,28 +2,15 @@
 <div [style.display]="'flex'" class="v-full">
   <aside [tuiNavigationAside]="expanded">
     <header>
-      <button iconLeft="tuiIconHome" tuiButton>
+      <button tuiButton routerLink="home">
         <tui-icon icon="tuiIconHome" />
       </button>
     </header>
-    <button iconLeft="tuiIconSearch" tuiButton>
+    <button tuiButton routerLink="search">
       <tui-icon icon="tuiIconSearch" />
     </button>
-    <tui-icon icon="tuiIconBook" />
-    <button tuiButton>
+    <button tuiButton routerLink="dictionary">
       <tui-icon icon="tuiIconBook" />
-    </button>
-    <a iconLeft="tuiIconUsers" routerLink="/experimental/navigation" routerLinkActive="active" tuiAppearance="flat"
-      tuiButton>
-      Groups
-    </a>
-    <tui-expand [expanded]="expanded">
-      <button tuiButton>Account</button>
-      <button tuiButton>Notifications</button>
-      <button tuiButton>Privacy</button>
-    </tui-expand>
-    <button iconLeft="tuiIconHeart" tuiButton>
-      <span tuiFade>By default ellipsis is used but you can use fade too</span>
     </button>
     <hr />
     <button iconLeft="tuiIconPlus" tuiButton>
@@ -41,7 +28,6 @@
   </aside>
   <main tuiNavigationMain class="pt-8">
     <tui-scrollbar>
-      <app-highlighted-text [text]="data_service.hallmarks()[0].description"></app-highlighted-text>
       <router-outlet />
     </tui-scrollbar>
   </main>

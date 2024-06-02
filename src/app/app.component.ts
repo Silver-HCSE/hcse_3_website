@@ -32,7 +32,7 @@ import { RouterModule } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   protected open = false;
-  protected expanded = false;
+  protected expanded = true;
   protected submenu = false;
   constructor(public data_service: HcseDataService) {
   }

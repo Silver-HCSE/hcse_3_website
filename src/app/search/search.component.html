@@ -1,10 +1,21 @@
 <input [(ngModel)]="searchTerm" />
-<button (onClick)="startSearch()">Search</button>
+<button (click)="startSearch()">Search</button>
 
-@if(results.length == 0) {
+@if(results.size == 0) {
 <b> No search results </b>
 } @else {
-	@for(res in results) {
-	<app-paper [id]="res.id" />
-	}
-	}
+<b> {{ results.size }} items found.</b>
+@if(articles) {
+<tui-accordion>
+  @for(article of (articles| async); track article.id) {
+  <tui-accordion-item>
+    {{ article.title }}
+
+    <ng-template tuiAccordionItemContent>
+      <app-paper [article]="article" />
+    </ng-template>
+  </tui-accordion-item>
+  }
+</tui-accordion>
+}
+}
