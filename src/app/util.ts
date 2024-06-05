@@ -80,7 +80,7 @@ export function keyword_ratings_to_dictionary(input: KeywordRating[]): KeywordDi
   return ret;
 }
 
-function norm_of_vector(input: number[]): number {
+export function norm_of_vector(input: number[]): number {
   let ret = 0;
   input.forEach(i => {
     ret += i * i;

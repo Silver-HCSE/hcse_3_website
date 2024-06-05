@@ -1,7 +1,7 @@
 import { Injectable, WritableSignal, Signal, signal, computed } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { openDB } from 'idb';
-import { ArticleListItem, HallmarkDescription, KeywordDictionary, KeywordRating, PubmedArticle, RatingFile, RatingIdPair, euclideanDistance, json_to_blob, keyword_ratings_to_dictionary, norm_vector, split_input_into_possible_keywords } from './util';
+import { ArticleListItem, HallmarkDescription, KeywordDictionary, KeywordRating, PubmedArticle, RatingFile, RatingIdPair, euclideanDistance, json_to_blob, keyword_ratings_to_dictionary, norm_of_vector, norm_vector, split_input_into_possible_keywords } from './util';
 import { Observable, map } from 'rxjs';
 import { ArticleListCollection } from './article-list';
 const DATABASE_NAME = 'HCSEFileCache';
@@ -189,9 +189,10 @@ export class HcseDataService {
   }
 
   public findClosestObjectsForSearchTerm(searchString: string): ArticleListCollection {
-    console.log("Starting search");
     const rating = this.get_rating_for_text(searchString);
-    console.log("Found rating " + rating);
+    if (norm_of_vector(rating) < 0.01) {
+      return new ArticleListCollection();
+    }
     let ret = this.findClosestObjects(rating);
     console.log(ret);
     return ret;

@@ -18,11 +18,14 @@
 </div>
 
 <div class="mx-auto mt-10">
+  @if(badRequest) {
+  <b> Un-rated search query. </b>
+  } @else {
   @if(results.size == 0) {
-  <b> No search results </b>
+  <b> No search results. </b>
   } @else {
   <b> {{ results.size }} items found.</b>
-  }
+  }}
 </div>
 <div class="pt-5 mx-auto">
   @if(articles) {

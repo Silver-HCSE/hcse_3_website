@@ -1,3 +1,12 @@
 @if(article) {
-<p>{{article.abstract}}</p>
+<p>
+  @for(a of article.authors; track a; let first = $first) {
+  <span class="italic text-grey-700">
+    @if(!first) {
+    ,&nbsp;
+    }
+    {{ a }}</span>
+  }
+</p>
+<app-highlighted-text [text]="article.abstract" />
 }

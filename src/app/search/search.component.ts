@@ -20,6 +20,7 @@ export class SearchComponent {
   results: ArticleListCollection;
   articles: Observable<PubmedArticle[]> | null = null;
   page = 0;
+  badRequest = false;
 
   constructor(private data_service: HcseDataService) {
     this.results = new ArticleListCollection();
@@ -27,7 +28,12 @@ export class SearchComponent {
 
   public startSearch() {
     this.results = this.data_service.findClosestObjectsForSearchTerm(this.searchTerm);
-    this.load_article_page();
+    if (this.results.size != 0) {
+      this.load_article_page();
+      this.badRequest = false;
+    } else {
+      this.badRequest = true;
+    }
   }
 
   public load_article_page() {
