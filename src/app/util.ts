@@ -83,17 +83,15 @@ export function keyword_ratings_to_dictionary(input: KeywordRating[]): KeywordDi
 export function norm_of_vector(input: number[]): number {
   let ret = 0;
   input.forEach(i => {
-    ret += i * i;
+    ret += i;
   });
-  return Math.sqrt(ret);
+  return ret;
 }
 
 export function norm_vector(input_vector: number[]): number[] {
   const norm = norm_of_vector(input_vector);
   if (norm > 0) {
-    let ret = input_vector;
-    ret.map(i => i / norm);
-    return ret;
+    return input_vector.map(i => i / norm);
   } else {
     return input_vector;
   }

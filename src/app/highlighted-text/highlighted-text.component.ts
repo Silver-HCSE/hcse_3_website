@@ -27,7 +27,6 @@ export class HighlightedTextComponent implements OnChanges {
 
   ngOnChanges(): void {
     this.keywords = this.data_service.get_keywords_for_text(this.text);
-    console.log(this.keywords);
     let arr = this.text.split(" ");
     let i = 0
     for (const w of arr) {
@@ -36,8 +35,5 @@ export class HighlightedTextComponent implements OnChanges {
       this.sections.push({ is_pure: this.keywords.indexOf(pot_keyword) == -1, content: w, index: i });
       i++;
     }
-
   }
-
-
 }

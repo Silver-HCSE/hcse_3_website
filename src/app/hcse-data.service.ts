@@ -116,13 +116,25 @@ export class HcseDataService {
   public get_rating_for_text(text: string): number[] {
     const keywords = split_input_into_possible_keywords(text, false);
     let rating = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    for (let word of keywords) {
-      const keyword_rating: KeywordRating = this.get_keyword_rating(word);
-      for (let i = 0; i < 10; i++) {
-        rating[i] += keyword_rating.rating[i];
+    const wordCounts: { [key: string]: number } = {};
+    for (const word of keywords) {
+      if (word in wordCounts) {
+        wordCounts[word]++;
+      } else {
+        wordCounts[word] = 1;
       }
     }
-    return norm_vector(rating);
+
+    for (const word in wordCounts) {
+      const keyword_rating: KeywordRating = this.get_keyword_rating(word);
+      const factor = Math.sqrt(wordCounts[word]);
+      // we could check here if the word has a rating but this way we simply add zero. Same effect.
+      for (let i = 0; i < 10; i++) {
+        rating[i] += keyword_rating.rating[i] * factor;
+      }
+    }
+    const computed_rating = norm_vector(rating);
+    return computed_rating;
   }
 
 
@@ -218,16 +230,13 @@ export class HcseDataService {
     const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(xmlString, 'application/xml');
 
-    console.log(xmlString);
     const article_elements = xmlDoc.getElementsByTagName("article");
-    console.log(article_elements.length);
     let ret: PubmedArticle[] = [];
     for (let i = 0; i < article_elements.length; i++) {
       let art = this.parseArticle(article_elements.item(i)!);
       art.id = ids[i];
       ret.push(art);
     }
-    console.log(ret);
     return ret;
   }
 
