@@ -2,6 +2,6 @@
 @if (s.is_pure) {
 {{s.content}}
 } @else {
-<tui-tag [value]="s.content"></tui-tag>
+<a [routerLink]="['/', 'keyword',s.content]"><tui-tag [value]="s.content"></tui-tag></a>
 }
 }

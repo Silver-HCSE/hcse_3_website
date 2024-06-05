@@ -6,7 +6,6 @@ import { Observable, map } from 'rxjs';
 import { ArticleListCollection } from './article-list';
 const DATABASE_NAME = 'HCSEFileCache';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -17,11 +16,24 @@ export class HcseDataService {
   keyword_ratings: WritableSignal<KeywordDictionary> = signal({});
   article_ratings: WritableSignal<RatingIdPair[]> = signal([]);
   hallmarks: WritableSignal<HallmarkDescription[]> = signal([]);
+  hallmark_names: Signal<string[]> = computed(() => this.hallmarks().map(h => h.title));
   are_keywords_loading: Signal<boolean> = computed(() => this.n_keywords() == 0);
   are_articles_loading: Signal<boolean> = computed(() => this.n_articles() == 0);
   n_articles: Signal<number> = computed(() => this.article_ratings().length);
   n_hallmarks: Signal<number> = computed(() => this.hallmarks().length);
   n_keywords: Signal<number> = computed(() => Object.keys(this.keyword_ratings()).length);
+  average_rating: Signal<number[]> = computed(() => {
+    let ret = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    for (const article of this.article_ratings()) {
+      for (let comp = 0; comp < ret.length; comp++) {
+        ret[comp] += article.r[comp];
+      }
+    }
+    for (let comp = 0; comp < ret.length; comp++) {
+      ret[comp] /= this.article_ratings().length;
+    }
+    return ret;
+  });
 
   private baseUrl = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi';
 
@@ -35,9 +47,6 @@ export class HcseDataService {
     if (this.are_keywords_loading()) {
       return ret;
     } else {
-      if (this.keyword_ratings().hasOwnProperty(keyword)) {
-        console.log("found");
-      }
       const r = (this.keyword_ratings())[keyword];
       if (!r) return ret;
       ret.rating = r;
