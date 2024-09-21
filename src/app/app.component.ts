@@ -1,11 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HcseDataService } from './hcse-data.service';
-import {
-  TuiButtonModule,
-  TuiExpandModule,
-  TuiScrollbarModule,
-} from '@taiga-ui/core';
-import { TuiIconModule, TuiIconsModule, TuiNavigationModule } from '@taiga-ui/experimental';
 import { CommonModule } from '@angular/common';
 import { KeywordRatingComponent } from './keyword-rating/keyword-rating.component';
 import { HighlightedTextComponent } from './highlighted-text/highlighted-text.component';
@@ -18,12 +12,6 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./app.component.scss'],
   imports: [
     HeaderComponent,
-    TuiNavigationModule,
-    TuiExpandModule,
-    TuiScrollbarModule,
-    TuiButtonModule,
-    TuiIconsModule,
-    TuiIconModule,
     CommonModule,
     RouterModule,
     HighlightedTextComponent,
