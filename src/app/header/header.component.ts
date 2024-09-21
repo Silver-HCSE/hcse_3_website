@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-import { TuiScrollbarModule } from '@taiga-ui/core';
-import { TuiNavigationModule } from '@taiga-ui/experimental';
+import { RouterModule } from '@angular/router';
+import { HlmMenuBarComponent, HlmMenuItemDirective } from '@spartan-ng/ui-menu-helm';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [
-    TuiNavigationModule],
+  imports: [HlmMenuBarComponent, HlmMenuItemDirective, RouterModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
