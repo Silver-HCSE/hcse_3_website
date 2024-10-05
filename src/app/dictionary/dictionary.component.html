@@ -17,11 +17,10 @@
 <div class="p-10">
   <b>Found {{count_string()}} results.</b>
   <br />
-
-  @for(word of keywords(); track word) {
-  <b>{{word.keyword}}</b>
-
-  <div><keyword-rating [keyword]="word.keyword" [rating]="word.rating" /></div>
-  <br />
+  @if(data.hallmark_names().length > 0) {
+    @for(word of keywords(); track word) {
+      <div><keyword-rating [hallmark_names]="data.hallmark_names()" [keyword]="word.keyword" [rating]="word.rating" /></div>
+      <br />
+    }
   }
 </div>

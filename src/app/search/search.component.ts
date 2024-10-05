@@ -6,12 +6,20 @@ import { PaperComponent } from '../paper/paper.component';
 import { ArticleListCollection } from '../article-list';
 import { PubmedArticle } from '../util';
 import { Observable } from 'rxjs';
-import { TuiAccordionModule } from '@taiga-ui/kit';
+import {
+  HlmAccordionModule,
+  HlmAccordionContentComponent,
+  HlmAccordionDirective,
+  HlmAccordionIconDirective,
+  HlmAccordionItemDirective,
+  HlmAccordionTriggerDirective,
+} from '@spartan-ng/ui-accordion-helm';
+import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [CommonModule, FormsModule, PaperComponent, TuiAccordionModule],
+  imports: [CommonModule, FormsModule, PaperComponent, HlmAccordionModule, HlmAccordionDirective, HlmAccordionContentComponent, HlmAccordionIconDirective, HlmAccordionItemDirective, HlmAccordionTriggerDirective, HlmButtonDirective],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss'
 })

@@ -10,6 +10,7 @@ import { SearchComponent } from './app/search/search.component';
 import { PaperComponent } from './app/paper/paper.component';
 import { PageNotFoundComponent } from './app/page-not-found/page-not-found.component';
 import { KeywordWrapperComponent } from './app/keyword-wrapper/keyword-wrapper.component';
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 const appRoutes: Routes = [
   { path: 'hallmarks', component: HallmarkDescriptionViewComponent },
@@ -25,7 +26,7 @@ bootstrapApplication(AppComponent, {
     provideExperimentalZonelessChangeDetection(),
     provideHttpClient(),
     importProvidersFrom([BrowserAnimationsModule]),
-    provideRouter(appRoutes, withComponentInputBinding())
+    provideRouter(appRoutes, withComponentInputBinding()), provideCharts(withDefaultRegisterables())
   ]
 })
   .catch(err => console.error(err));

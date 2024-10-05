@@ -23,9 +23,6 @@
       "dom"
     ],
     "paths": {
-      "@spartan-ng/ui-accordion-helm": [
-        "./src/components/ui-accordion-helm/src/index.ts"
-      ],
       "@spartan-ng/ui-alert-helm": [
         "./src/components/ui-alert-helm/src/index.ts"
       ],
@@ -52,9 +49,6 @@
       ],
       "@spartan-ng/ui-dialog-helm": [
         "./src/components/ui-dialog-helm/src/index.ts"
-      ],
-      "@spartan-ng/ui-icon-helm": [
-        "./src/components/ui-icon-helm/src/index.ts"
       ],
       "@spartan-ng/ui-input-helm": [
         "./src/components/ui-input-helm/src/index.ts"
@@ -130,6 +124,12 @@
       ],
       "@spartan-ng/ui-formfield-helm": [
         "./src/components/ui-formfield-helm/src/index.ts"
+      ],
+      "@spartan-ng/ui-accordion-helm": [
+        "./src/components/ui-accordion-helm/src/index.ts"
+      ],
+      "@spartan-ng/ui-icon-helm": [
+        "./src/components/ui-icon-helm/src/index.ts"
       ]
     }
   },

@@ -49,10 +49,10 @@ export class DictionaryComponent {
     return ret;
   });
 
+  public hallmark_names: string[] = [];
 
-
-  constructor(private data: HcseDataService) {
-
+  constructor(public data: HcseDataService) {
+    this.hallmark_names = data.hallmark_names();
   }
 
 }

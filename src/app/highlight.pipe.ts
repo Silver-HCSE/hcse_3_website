@@ -14,7 +14,7 @@ export class HighlightPipe implements PipeTransform {
     let highlightedText = value;
     for (const keyword of keywords) {
       const regex = new RegExp(`(${keyword})`, 'gi');
-      highlightedText = highlightedText.replace(regex, `<tui-tag>$1</tui-tag>`);
+      highlightedText = highlightedText.replace(regex, `<span hlmBadge>$1</span>`);
     }
     return highlightedText;
   }
