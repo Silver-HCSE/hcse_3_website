@@ -1,12 +1,7 @@
 <div class=" display-block text-center">
   <div class="test-center w-full font-semibold mb-1">{{keyword}}</div>
-  <tui-arc-chart size="xl" class="" [value]="rating" [max]="1" [(activeItemIndex)]="activeItemIndex" />
-</div>
-<div class="legend">
-  @for (label of data_service.hallmark_names(); track label; let index = $index) {
-  <tui-legend-item size="s" class="item" [active]="isItemActive(index)" [color]="getColor(index)" [text]="label"
-    (tuiHoveredChange)="onHover(index, $event)">
-    {{rating[index]}}
-  </tui-legend-item>
-  }
+    <div class="h-60 w-full">
+    <canvas baseChart [data]="doughnutChartData" [type]="doughnutChartType" [options]="doughnutChartOptions">
+    </canvas>
+    </div>
 </div>

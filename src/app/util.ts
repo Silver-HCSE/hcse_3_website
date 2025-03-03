@@ -54,15 +54,36 @@ export function euclideanDistance(vec1: number[], vec2: number[]): number {
 }
 
 export function split_input_into_possible_keywords(text: string, deduplicate: boolean = true): string[] {
-  let cleared = text.replace(/[.?,;()!]/g, ' ');
+  let cleared = text.replace(/[.?,;()!'"%=\/\\-]/g, ' ');
   cleared = cleared.toLowerCase();
-  let words = cleared.split(/\s+/).filter(word => word.length > 4);
+  let words = cleared.split(/\s+/).map(word => remove_leading_and_trailing_hyphens(word)).filter(word => word.length > 4);
   words = words.map((w) => w.trim());
   words.sort();
   if (deduplicate) {
     words = Array.from(new Set(words));
   }
   return words;
+}
+
+export function remove_leading_and_trailing_hyphens(keyword: string): string {
+  let ret = keyword;
+  let has_changed = true;
+  while (has_changed) {
+    has_changed = false;
+    const first_letter = ret[0];
+    const last_letter = ret[ret.length - 1];
+    if (ret.length > 4) {
+      if (first_letter == '-') {
+        ret = ret.substring(1);
+        has_changed = true;
+      }
+      if (last_letter == '-') {
+        ret = ret.substring(0, ret.length - 1);
+        has_changed = true;
+      }
+    }
+  }
+  return ret;
 }
 
 export function json_to_blob(data: any): Blob {

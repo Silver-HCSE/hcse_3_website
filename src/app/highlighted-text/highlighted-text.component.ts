@@ -1,8 +1,7 @@
 import { Component, Input, OnChanges } from '@angular/core';
-import { TuiTagModule } from '@taiga-ui/kit';
 import { HcseDataService } from '../hcse-data.service';
-import { TuiNavigationModule } from '@taiga-ui/experimental';
 import { RouterModule } from '@angular/router';
+import { HlmBadgeDirective } from '@spartan-ng/ui-badge-helm';
 
 class section {
   is_pure: boolean = true;
@@ -13,8 +12,7 @@ class section {
 @Component({
   selector: 'app-highlighted-text',
   standalone: true,
-  imports: [
-    TuiTagModule, TuiNavigationModule, RouterModule],
+  imports: [RouterModule, HlmBadgeDirective],
   templateUrl: './highlighted-text.component.html',
   styleUrl: './highlighted-text.component.scss'
 })

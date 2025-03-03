@@ -1,0 +1,802 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>hcse-website documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">hcse-website documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content miscellaneous-typealiases">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Miscellaneous</li>
+  <li class="breadcrumb-item">Type aliases</li>
+</ol>
+
+<section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <ul class="index-list">
+                        <li>
+                            <a href="#AlertDescriptionVariants" title="src/components/ui-alert-helm/src/lib/hlm-alert-description.directive.ts" ><b>AlertDescriptionVariants</b>&nbsp;&nbsp;&nbsp;(src/.../hlm-alert-description.directive.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#AlertTitleVariants" title="src/components/ui-alert-helm/src/lib/hlm-alert-title.directive.ts" ><b>AlertTitleVariants</b>&nbsp;&nbsp;&nbsp;(src/.../hlm-alert-title.directive.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#AlertVariants" title="src/components/ui-alert-helm/src/lib/hlm-alert.directive.ts" ><b>AlertVariants</b>&nbsp;&nbsp;&nbsp;(src/.../hlm-alert.directive.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#AvatarVariants" title="src/components/ui-avatar-helm/src/lib/hlm-avatar.component.ts" ><b>AvatarVariants</b>&nbsp;&nbsp;&nbsp;(src/.../hlm-avatar.component.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#badgeVariants" title="src/components/ui-badge-helm/src/lib/hlm-badge.directive.ts" ><b>badgeVariants</b>&nbsp;&nbsp;&nbsp;(src/.../hlm-badge.directive.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ButtonVariants" title="src/components/ui-button-helm/src/lib/hlm-button.directive.ts" ><b>ButtonVariants</b>&nbsp;&nbsp;&nbsp;(src/.../hlm-button.directive.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#CardContentVariants" title="src/components/ui-card-helm/src/lib/hlm-card-content.directive.ts" ><b>CardContentVariants</b>&nbsp;&nbsp;&nbsp;(src/.../hlm-card-content.directive.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#CardDescriptionVariants" title="src/components/ui-card-helm/src/lib/hlm-card-description.directive.ts" ><b>CardDescriptionVariants</b>&nbsp;&nbsp;&nbsp;(src/.../hlm-card-description.directive.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#CardFooterVariants" title="src/components/ui-card-helm/src/lib/hlm-card-footer.directive.ts" ><b>CardFooterVariants</b>&nbsp;&nbsp;&nbsp;(src/.../hlm-card-footer.directive.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#CardHeaderVariants" title="src/components/ui-card-helm/src/lib/hlm-card-header.directive.ts" ><b>CardHeaderVariants</b>&nbsp;&nbsp;&nbsp;(src/.../hlm-card-header.directive.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#CardTitleVariants" title="src/components/ui-card-helm/src/lib/hlm-card-title.directive.ts" ><b>CardTitleVariants</b>&nbsp;&nbsp;&nbsp;(src/.../hlm-card-title.directive.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#CardVariants" title="src/components/ui-card-helm/src/lib/hlm-card.directive.ts" ><b>CardVariants</b>&nbsp;&nbsp;&nbsp;(src/.../hlm-card.directive.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#DefinedSizes" title="src/components/ui-icon-helm/src/lib/hlm-icon.component.ts" ><b>DefinedSizes</b>&nbsp;&nbsp;&nbsp;(src/.../hlm-icon.component.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#HlmDialogOptions" title="src/components/ui-dialog-helm/src/lib/hlm-dialog.service.ts" ><b>HlmDialogOptions</b>&nbsp;&nbsp;&nbsp;(src/.../hlm-dialog.service.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#HlmMenuItemVariants" title="src/components/ui-menu-helm/src/lib/hlm-menu-item.directive.ts" ><b>HlmMenuItemVariants</b>&nbsp;&nbsp;&nbsp;(src/.../hlm-menu-item.directive.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#HlmSeparatorOrientation" title="src/components/ui-separator-helm/src/lib/hlm-separator.directive.ts" ><b>HlmSeparatorOrientation</b>&nbsp;&nbsp;&nbsp;(src/.../hlm-separator.directive.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#IconSize" title="src/components/ui-icon-helm/src/lib/hlm-icon.component.ts" ><b>IconSize</b>&nbsp;&nbsp;&nbsp;(src/.../hlm-icon.component.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#InputErrorVariants" title="src/components/ui-input-helm/src/lib/hlm-input-error.directive.ts" ><b>InputErrorVariants</b>&nbsp;&nbsp;&nbsp;(src/.../hlm-input-error.directive.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#InputVariants" title="src/components/ui-input-helm/src/lib/hlm-input.directive.ts" ><b>InputVariants</b>&nbsp;&nbsp;&nbsp;(src/.../hlm-input.directive.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#LabelVariants" title="src/components/ui-label-helm/src/lib/hlm-label.directive.ts" ><b>LabelVariants</b>&nbsp;&nbsp;&nbsp;(src/.../hlm-label.directive.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ListVariants" title="src/components/ui-tabs-helm/src/lib/hlm-tabs-list.component.ts" ><b>ListVariants</b>&nbsp;&nbsp;&nbsp;(src/.../hlm-tabs-list.component.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#MenuVariants" title="src/components/ui-menu-helm/src/lib/hlm-menu.component.ts" ><b>MenuVariants</b>&nbsp;&nbsp;&nbsp;(src/.../hlm-menu.component.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#PaginationContentVariants" title="src/components/ui-pagination-helm/src/lib/hlm-pagination-content.directive.ts" ><b>PaginationContentVariants</b>&nbsp;&nbsp;&nbsp;(src/.../hlm-pagination-content.directive.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#PaginationItemVariants" title="src/components/ui-pagination-helm/src/lib/hlm-pagination-item.directive.ts" ><b>PaginationItemVariants</b>&nbsp;&nbsp;&nbsp;(src/.../hlm-pagination-item.directive.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#PaginationLinkVariants" title="src/components/ui-pagination-helm/src/lib/hlm-pagination-link.directive.ts" ><b>PaginationLinkVariants</b>&nbsp;&nbsp;&nbsp;(src/.../hlm-pagination-link.directive.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#PaginationVariants" title="src/components/ui-pagination-helm/src/lib/hlm-pagination.directive.ts" ><b>PaginationVariants</b>&nbsp;&nbsp;&nbsp;(src/.../hlm-pagination.directive.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#SelectTriggerVariants" title="src/components/ui-select-helm/src/lib/hlm-select-trigger.component.ts" ><b>SelectTriggerVariants</b>&nbsp;&nbsp;&nbsp;(src/.../hlm-select-trigger.component.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#SpinnerVariants" title="src/components/ui-spinner-helm/src/lib/hlm-spinner.component.ts" ><b>SpinnerVariants</b>&nbsp;&nbsp;&nbsp;(src/.../hlm-spinner.component.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ToggleVariants" title="src/components/ui-toggle-helm/src/lib/hlm-toggle.directive.ts" ><b>ToggleVariants</b>&nbsp;&nbsp;&nbsp;(src/.../hlm-toggle.directive.ts)</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <h3>src/components/ui-alert-helm/src/lib/hlm-alert-description.directive.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="AlertDescriptionVariants"></a>
+                    <span class="name "><b>AlertDescriptionVariants</b><a href="#AlertDescriptionVariants"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>VariantProps&lt;&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/components/ui-alert-helm/src/lib/hlm-alert-title.directive.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="AlertTitleVariants"></a>
+                    <span class="name "><b>AlertTitleVariants</b><a href="#AlertTitleVariants"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>VariantProps&lt;&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/components/ui-alert-helm/src/lib/hlm-alert.directive.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="AlertVariants"></a>
+                    <span class="name "><b>AlertVariants</b><a href="#AlertVariants"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>VariantProps&lt;&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/components/ui-avatar-helm/src/lib/hlm-avatar.component.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="AvatarVariants"></a>
+                    <span class="name "><b>AvatarVariants</b><a href="#AvatarVariants"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>VariantProps&lt;&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/components/ui-badge-helm/src/lib/hlm-badge.directive.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="badgeVariants"></a>
+                    <span class="name "><b>badgeVariants</b><a href="#badgeVariants"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>VariantProps&lt;&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/components/ui-button-helm/src/lib/hlm-button.directive.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ButtonVariants"></a>
+                    <span class="name "><b>ButtonVariants</b><a href="#ButtonVariants"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>VariantProps&lt;&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/components/ui-card-helm/src/lib/hlm-card-content.directive.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CardContentVariants"></a>
+                    <span class="name "><b>CardContentVariants</b><a href="#CardContentVariants"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>VariantProps&lt;&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/components/ui-card-helm/src/lib/hlm-card-description.directive.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CardDescriptionVariants"></a>
+                    <span class="name "><b>CardDescriptionVariants</b><a href="#CardDescriptionVariants"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>VariantProps&lt;&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/components/ui-card-helm/src/lib/hlm-card-footer.directive.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CardFooterVariants"></a>
+                    <span class="name "><b>CardFooterVariants</b><a href="#CardFooterVariants"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>VariantProps&lt;&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/components/ui-card-helm/src/lib/hlm-card-header.directive.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CardHeaderVariants"></a>
+                    <span class="name "><b>CardHeaderVariants</b><a href="#CardHeaderVariants"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>VariantProps&lt;&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/components/ui-card-helm/src/lib/hlm-card-title.directive.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CardTitleVariants"></a>
+                    <span class="name "><b>CardTitleVariants</b><a href="#CardTitleVariants"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>VariantProps&lt;&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/components/ui-card-helm/src/lib/hlm-card.directive.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CardVariants"></a>
+                    <span class="name "><b>CardVariants</b><a href="#CardVariants"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>VariantProps&lt;&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/components/ui-icon-helm/src/lib/hlm-icon.component.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DefinedSizes"></a>
+                    <span class="name "><b>DefinedSizes</b><a href="#DefinedSizes"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="IconSize"></a>
+                    <span class="name "><b>IconSize</b><a href="#IconSize"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../miscellaneous/typealiases.html#DefinedSizes" target="_self" >DefinedSizes | </a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/components/ui-dialog-helm/src/lib/hlm-dialog.service.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="HlmDialogOptions"></a>
+                    <span class="name "><b>HlmDialogOptions</b><a href="#HlmDialogOptions"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/components/ui-menu-helm/src/lib/hlm-menu-item.directive.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="HlmMenuItemVariants"></a>
+                    <span class="name "><b>HlmMenuItemVariants</b><a href="#HlmMenuItemVariants"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>VariantProps&lt;&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/components/ui-separator-helm/src/lib/hlm-separator.directive.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="HlmSeparatorOrientation"></a>
+                    <span class="name "><b>HlmSeparatorOrientation</b><a href="#HlmSeparatorOrientation"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>&quot;horizontal&quot; | &quot;vertical&quot;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/components/ui-input-helm/src/lib/hlm-input-error.directive.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="InputErrorVariants"></a>
+                    <span class="name "><b>InputErrorVariants</b><a href="#InputErrorVariants"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>VariantProps&lt;&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/components/ui-input-helm/src/lib/hlm-input.directive.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="InputVariants"></a>
+                    <span class="name "><b>InputVariants</b><a href="#InputVariants"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>VariantProps&lt;&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/components/ui-label-helm/src/lib/hlm-label.directive.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="LabelVariants"></a>
+                    <span class="name "><b>LabelVariants</b><a href="#LabelVariants"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>VariantProps&lt;&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/components/ui-tabs-helm/src/lib/hlm-tabs-list.component.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ListVariants"></a>
+                    <span class="name "><b>ListVariants</b><a href="#ListVariants"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>VariantProps&lt;&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/components/ui-menu-helm/src/lib/hlm-menu.component.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="MenuVariants"></a>
+                    <span class="name "><b>MenuVariants</b><a href="#MenuVariants"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>VariantProps&lt;&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/components/ui-pagination-helm/src/lib/hlm-pagination-content.directive.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="PaginationContentVariants"></a>
+                    <span class="name "><b>PaginationContentVariants</b><a href="#PaginationContentVariants"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>VariantProps&lt;&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/components/ui-pagination-helm/src/lib/hlm-pagination-item.directive.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="PaginationItemVariants"></a>
+                    <span class="name "><b>PaginationItemVariants</b><a href="#PaginationItemVariants"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>VariantProps&lt;&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/components/ui-pagination-helm/src/lib/hlm-pagination-link.directive.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="PaginationLinkVariants"></a>
+                    <span class="name "><b>PaginationLinkVariants</b><a href="#PaginationLinkVariants"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>VariantProps&lt;&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/components/ui-pagination-helm/src/lib/hlm-pagination.directive.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="PaginationVariants"></a>
+                    <span class="name "><b>PaginationVariants</b><a href="#PaginationVariants"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>VariantProps&lt;&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/components/ui-select-helm/src/lib/hlm-select-trigger.component.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="SelectTriggerVariants"></a>
+                    <span class="name "><b>SelectTriggerVariants</b><a href="#SelectTriggerVariants"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>VariantProps&lt;&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/components/ui-spinner-helm/src/lib/hlm-spinner.component.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="SpinnerVariants"></a>
+                    <span class="name "><b>SpinnerVariants</b><a href="#SpinnerVariants"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>VariantProps&lt;&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/components/ui-toggle-helm/src/lib/hlm-toggle.directive.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ToggleVariants"></a>
+                    <span class="name "><b>ToggleVariants</b><a href="#ToggleVariants"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>VariantProps&lt;&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'miscellaneous-typealiases';
+            var COMPODOC_CURRENT_PAGE_URL = 'typealiases.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
