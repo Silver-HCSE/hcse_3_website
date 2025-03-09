@@ -29,17 +29,18 @@
 </div>
 <div class="pt-5 mx-auto">
   @if(articles) {
-  <tui-accordion>
+  <div hlmAccordion>
     @for(article of (articles| async); track article.id) {
-    <tui-accordion-item>
+    <div hlmAccordionItem>
+      <button hlmAccordionTrigger>
       {{ article.title }}
-
-      <ng-template tuiAccordionItemContent>
+      </button>
+      <hlm-accordion-content>
         <app-paper [article]="article" />
-      </ng-template>
-    </tui-accordion-item>
+      </hlm-accordion-content>
+    </div>
     }
-  </tui-accordion>
+  </div>
   }
 </div>
 @if(articles) {

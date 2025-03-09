@@ -1,0 +1,1418 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>hcse-website documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">hcse-website documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  HlmCheckboxComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/components/ui-checkbox-helm/src/lib/hlm-checkbox.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">host</td>
+                <td class="col-md-9"><code>{<br>}</code></td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">providers</td>
+                <td class="col-md-9">
+                                <code><a href="../miscellaneous/variables.html#HLM_CHECKBOX_VALUE_ACCESSOR" target="_self" >HLM_CHECKBOX_VALUE_ACCESSOR</a></code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>hlm-checkbox</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>BrnCheckboxComponent</code>
+                                <code><a href="../components/HlmCheckboxCheckIconComponent.html" target="_self" >HlmCheckboxCheckIconComponent</a></code>
+                </td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">template</td>
+                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;brn-checkbox
+	[id]&#x3D;&quot;id()&quot;
+	[name]&#x3D;&quot;name()&quot;
+	[class]&#x3D;&quot;_computedClass()&quot;
+	[checked]&#x3D;&quot;checked()&quot;
+	[disabled]&#x3D;&quot;_disabled()&quot;
+	[required]&#x3D;&quot;required()&quot;
+	[aria-label]&#x3D;&quot;ariaLabel()&quot;
+	[aria-labelledby]&#x3D;&quot;ariaLabelledby()&quot;
+	[aria-describedby]&#x3D;&quot;ariaDescribedby()&quot;
+	(changed)&#x3D;&quot;_handleChange()&quot;
+	(touched)&#x3D;&quot;_onTouched()&quot;
+&gt;
+	&lt;hlm-checkbox-checkicon [class]&#x3D;&quot;checkIconClass()&quot; [iconName]&#x3D;&quot;checkIconName()&quot; /&gt;
+&lt;/brn-checkbox&gt;
+	</code></pre></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#_computedClass" >_computedClass</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#_disabled" >_disabled</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#_onChange" >_onChange</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#_onTouched" >_onTouched</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#ariaDescribedby" >ariaDescribedby</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#ariaLabel" >ariaLabel</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#ariaLabelledby" >ariaLabelledby</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#checked" >checked</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#checkIconClass" >checkIconClass</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#checkIconName" >checkIconName</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#disabled" >disabled</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#disableInput" >disableInput</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#id" >id</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#name" >name</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#required" >required</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#userClass" >userClass</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#_handleChange" >_handleChange</a>
+                            </li>
+                            <li>
+                                <a href="#registerOnChange" >registerOnChange</a>
+                            </li>
+                            <li>
+                                <a href="#registerOnTouched" >registerOnTouched</a>
+                            </li>
+                            <li>
+                                <a href="#setDisabledState" >setDisabledState</a>
+                            </li>
+                            <li>
+                                <a href="#writeValue" >writeValue</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#changed" >changed</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+    <section data-compodoc="block-outputs">
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="changed"></a>
+                        <b>changed</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="98" class="link-to-prism">src/components/ui-checkbox-helm/src/lib/hlm-checkbox.component.ts:98</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_handleChange"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                        <span ><b>_handleChange</b></span>
+                        <a href="#_handleChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>_handleChange()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="100"
+                                    class="link-to-prism">src/components/ui-checkbox-helm/src/lib/hlm-checkbox.component.ts:100</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="registerOnChange"></a>
+                    <span class="name">
+                        <span ><b>registerOnChange</b></span>
+                        <a href="#registerOnChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>registerOnChange(fn: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="121"
+                                    class="link-to-prism">src/components/ui-checkbox-helm/src/lib/hlm-checkbox.component.ts:121</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>fn</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="registerOnTouched"></a>
+                    <span class="name">
+                        <span ><b>registerOnTouched</b></span>
+                        <a href="#registerOnTouched"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>registerOnTouched(fn: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="126"
+                                    class="link-to-prism">src/components/ui-checkbox-helm/src/lib/hlm-checkbox.component.ts:126</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>fn</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setDisabledState"></a>
+                    <span class="name">
+                        <span ><b>setDisabledState</b></span>
+                        <a href="#setDisabledState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setDisabledState(isDisabled: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="130"
+                                    class="link-to-prism">src/components/ui-checkbox-helm/src/lib/hlm-checkbox.component.ts:130</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>isDisabled</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="writeValue"></a>
+                    <span class="name">
+                        <span ><b>writeValue</b></span>
+                        <a href="#writeValue"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>writeValue(value: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="112"
+                                    class="link-to-prism">src/components/ui-checkbox-helm/src/lib/hlm-checkbox.component.ts:112</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>CONROL VALUE ACCESSOR</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>value</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_computedClass"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                        <span ><b>_computedClass</b></span>
+                        <a href="#_computedClass"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt;
+		hlm(
+			&#x27;group inline-flex border border-foreground shrink-0 cursor-pointer items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring&#x27; +
+				&#x27; focus-visible:ring-offset-2 focus-visible:ring-offset-background data-[state&#x3D;checked]:text-background data-[state&#x3D;checked]:bg-primary data-[state&#x3D;unchecked]:bg-background&#x27;,
+			this.userClass(),
+			this._disabled() ? &#x27;cursor-not-allowed opacity-50&#x27; : &#x27;&#x27;,
+		),
+	)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/components/ui-checkbox-helm/src/lib/hlm-checkbox.component.ts:57</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_disabled"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>_disabled</b></span>
+                        <a href="#_disabled"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="83" class="link-to-prism">src/components/ui-checkbox-helm/src/lib/hlm-checkbox.component.ts:83</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_onChange"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                        <span ><b>_onChange</b></span>
+                        <a href="#_onChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>() &#x3D;&gt; {...}</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="116" class="link-to-prism">src/components/ui-checkbox-helm/src/lib/hlm-checkbox.component.ts:116</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_onTouched"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                        <span ><b>_onTouched</b></span>
+                        <a href="#_onTouched"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>() &#x3D;&gt; {...}</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="118" class="link-to-prism">src/components/ui-checkbox-helm/src/lib/hlm-checkbox.component.ts:118</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ariaDescribedby"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>ariaDescribedby</b></span>
+                        <a href="#ariaDescribedby"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>input&lt;string | null&gt;(null, { alias: &#x27;aria-describedby&#x27; })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/components/ui-checkbox-helm/src/lib/hlm-checkbox.component.ts:76</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Used to set the aria-describedby attribute on the underlying brn element.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ariaLabel"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>ariaLabel</b></span>
+                        <a href="#ariaLabel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>input&lt;string | null&gt;(null, { alias: &#x27;aria-label&#x27; })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/components/ui-checkbox-helm/src/lib/hlm-checkbox.component.ts:70</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Used to set the aria-label attribute on the underlying brn element.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ariaLabelledby"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>ariaLabelledby</b></span>
+                        <a href="#ariaLabelledby"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>input&lt;string | null&gt;(null, { alias: &#x27;aria-labelledby&#x27; })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/components/ui-checkbox-helm/src/lib/hlm-checkbox.component.ts:73</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Used to set the aria-labelledby attribute on the underlying brn element.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="checked"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>checked</b></span>
+                        <a href="#checked"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>model&lt;boolean | &#x27;indeterminate&#x27;&gt;(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/components/ui-checkbox-helm/src/lib/hlm-checkbox.component.ts:78</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="checkIconClass"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>checkIconClass</b></span>
+                        <a href="#checkIconClass"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>input&lt;string&gt;(&#x27;&#x27;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="95" class="link-to-prism">src/components/ui-checkbox-helm/src/lib/hlm-checkbox.component.ts:95</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="checkIconName"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>checkIconName</b></span>
+                        <a href="#checkIconName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>input&lt;string&gt;(&#x27;lucideCheck&#x27;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">src/components/ui-checkbox-helm/src/lib/hlm-checkbox.component.ts:94</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="disabled"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>disabled</b></span>
+                        <a href="#disabled"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>input(false, { transform: booleanAttribute })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">src/components/ui-checkbox-helm/src/lib/hlm-checkbox.component.ts:84</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="disableInput"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>disableInput</b></span>
+                        <a href="#disableInput"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>effect(
+		() &#x3D;&gt; {
+			this._disabled.set(this.disabled());
+		},
+		{ allowSignalWrites: true },
+	)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">src/components/ui-checkbox-helm/src/lib/hlm-checkbox.component.ts:86</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="id"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>id</b></span>
+                        <a href="#id"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>input&lt;string | null&gt;(null)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/components/ui-checkbox-helm/src/lib/hlm-checkbox.component.ts:67</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Used to set the id on the underlying brn element.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="name"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>name</b></span>
+                        <a href="#name"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>input&lt;string | null&gt;(null)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/components/ui-checkbox-helm/src/lib/hlm-checkbox.component.ts:80</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="required"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>required</b></span>
+                        <a href="#required"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>input(false, { transform: booleanAttribute })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">src/components/ui-checkbox-helm/src/lib/hlm-checkbox.component.ts:81</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userClass"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>userClass</b></span>
+                        <a href="#userClass"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>input&lt;ClassValue&gt;(&#x27;&#x27;, { alias: &#x27;class&#x27; })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/components/ui-checkbox-helm/src/lib/hlm-checkbox.component.ts:56</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+	Component,
+	EventEmitter,
+	Output,
+	booleanAttribute,
+	computed,
+	effect,
+	forwardRef,
+	input,
+	model,
+	signal,
+} from &#x27;@angular/core&#x27;;
+import { NG_VALUE_ACCESSOR } from &#x27;@angular/forms&#x27;;
+import { BrnCheckboxComponent } from &#x27;@spartan-ng/brain/checkbox&#x27;;
+import { hlm } from &#x27;@spartan-ng/ui-core&#x27;;
+import type { ClassValue } from &#x27;clsx&#x27;;
+import { HlmCheckboxCheckIconComponent } from &#x27;./hlm-checkbox-checkicon.component&#x27;;
+
+export const HLM_CHECKBOX_VALUE_ACCESSOR &#x3D; {
+	provide: NG_VALUE_ACCESSOR,
+	useExisting: forwardRef(() &#x3D;&gt; HlmCheckboxComponent),
+	multi: true,
+};
+
+@Component({
+	selector: &#x27;hlm-checkbox&#x27;,
+	standalone: true,
+	imports: [BrnCheckboxComponent, HlmCheckboxCheckIconComponent],
+	template: &#x60;
+		&lt;brn-checkbox
+			[id]&#x3D;&quot;id()&quot;
+			[name]&#x3D;&quot;name()&quot;
+			[class]&#x3D;&quot;_computedClass()&quot;
+			[checked]&#x3D;&quot;checked()&quot;
+			[disabled]&#x3D;&quot;_disabled()&quot;
+			[required]&#x3D;&quot;required()&quot;
+			[aria-label]&#x3D;&quot;ariaLabel()&quot;
+			[aria-labelledby]&#x3D;&quot;ariaLabelledby()&quot;
+			[aria-describedby]&#x3D;&quot;ariaDescribedby()&quot;
+			(changed)&#x3D;&quot;_handleChange()&quot;
+			(touched)&#x3D;&quot;_onTouched()&quot;
+		&gt;
+			&lt;hlm-checkbox-checkicon [class]&#x3D;&quot;checkIconClass()&quot; [iconName]&#x3D;&quot;checkIconName()&quot; /&gt;
+		&lt;/brn-checkbox&gt;
+	&#x60;,
+	host: {
+		class: &#x27;contents&#x27;,
+		&#x27;[attr.id]&#x27;: &#x27;null&#x27;,
+		&#x27;[attr.aria-label]&#x27;: &#x27;null&#x27;,
+		&#x27;[attr.aria-labelledby]&#x27;: &#x27;null&#x27;,
+		&#x27;[attr.aria-describedby]&#x27;: &#x27;null&#x27;,
+	},
+	providers: [HLM_CHECKBOX_VALUE_ACCESSOR],
+})
+export class HlmCheckboxComponent {
+	public readonly userClass &#x3D; input&lt;ClassValue&gt;(&#x27;&#x27;, { alias: &#x27;class&#x27; });
+	protected _computedClass &#x3D; computed(() &#x3D;&gt;
+		hlm(
+			&#x27;group inline-flex border border-foreground shrink-0 cursor-pointer items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring&#x27; +
+				&#x27; focus-visible:ring-offset-2 focus-visible:ring-offset-background data-[state&#x3D;checked]:text-background data-[state&#x3D;checked]:bg-primary data-[state&#x3D;unchecked]:bg-background&#x27;,
+			this.userClass(),
+			this._disabled() ? &#x27;cursor-not-allowed opacity-50&#x27; : &#x27;&#x27;,
+		),
+	);
+
+	/** Used to set the id on the underlying brn element. */
+	public readonly id &#x3D; input&lt;string | null&gt;(null);
+
+	/** Used to set the aria-label attribute on the underlying brn element. */
+	public readonly ariaLabel &#x3D; input&lt;string | null&gt;(null, { alias: &#x27;aria-label&#x27; });
+
+	/** Used to set the aria-labelledby attribute on the underlying brn element. */
+	public readonly ariaLabelledby &#x3D; input&lt;string | null&gt;(null, { alias: &#x27;aria-labelledby&#x27; });
+
+	/** Used to set the aria-describedby attribute on the underlying brn element. */
+	public readonly ariaDescribedby &#x3D; input&lt;string | null&gt;(null, { alias: &#x27;aria-describedby&#x27; });
+
+	public readonly checked &#x3D; model&lt;boolean | &#x27;indeterminate&#x27;&gt;(false);
+
+	public readonly name &#x3D; input&lt;string | null&gt;(null);
+	public readonly required &#x3D; input(false, { transform: booleanAttribute });
+
+	protected readonly _disabled &#x3D; signal(false);
+	public readonly disabled &#x3D; input(false, { transform: booleanAttribute });
+
+	private disableInput &#x3D; effect(
+		() &#x3D;&gt; {
+			this._disabled.set(this.disabled());
+		},
+		{ allowSignalWrites: true },
+	);
+
+	// icon inputs
+	public readonly checkIconName &#x3D; input&lt;string&gt;(&#x27;lucideCheck&#x27;);
+	public readonly checkIconClass &#x3D; input&lt;string&gt;(&#x27;&#x27;);
+
+	@Output()
+	public changed &#x3D; new EventEmitter&lt;boolean&gt;();
+
+	protected _handleChange(): void {
+		if (this._disabled()) return;
+
+		const previousChecked &#x3D; this.checked();
+		this.checked.set(previousChecked &#x3D;&#x3D;&#x3D; &#x27;indeterminate&#x27; ? true : !previousChecked);
+		this._onChange(!previousChecked);
+		this.changed.emit(!previousChecked);
+	}
+
+	/** CONROL VALUE ACCESSOR */
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	writeValue(value: any): void {
+		this.checked.set(!!value);
+	}
+	// eslint-disable-next-line @typescript-eslint/no-empty-function,@typescript-eslint/no-unused-vars,,@typescript-eslint/no-explicit-any
+	protected _onChange &#x3D; (_: any) &#x3D;&gt; {};
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
+	protected _onTouched &#x3D; () &#x3D;&gt; {};
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	registerOnChange(fn: any): void {
+		this._onChange &#x3D; fn;
+	}
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	registerOnTouched(fn: any): void {
+		this._onTouched &#x3D; fn;
+	}
+
+	setDisabledState(isDisabled: boolean): void {
+		this._disabled.set(isDisabled);
+	}
+}
+</code></pre>
+    </div>
+
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><brn-checkbox	[id]="id()"	[name]="name()"	[class]="_computedClass()"	[checked]="checked()"	[disabled]="_disabled()"	[required]="required()"	[aria-label]="ariaLabel()"	[aria-labelledby]="ariaLabelledby()"	[aria-describedby]="ariaDescribedby()"	(changed)="_handleChange()"	(touched)="_onTouched()">	<hlm-checkbox-checkicon [class]="checkIconClass()" [iconName]="checkIconName()" /></brn-checkbox>	</div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'DictionaryComponent', 'selector': 'app-dictionary'},{'name': 'HallmarkDescriptionViewComponent', 'selector': 'app-hallmark-description-view'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HighlightedTextComponent', 'selector': 'app-highlighted-text'},{'name': 'HlmAlertDialogComponent', 'selector': 'hlm-alert-dialog'},{'name': 'HlmAlertDialogContentComponent', 'selector': 'hlm-alert-dialog-content'},{'name': 'HlmAlertDialogFooterComponent', 'selector': 'hlm-alert-dialog-footer'},{'name': 'HlmAlertDialogHeaderComponent', 'selector': 'hlm-alert-dialog-header'},{'name': 'HlmAvatarComponent', 'selector': 'hlm-avatar'},{'name': 'HlmCaptionComponent', 'selector': 'hlm-caption'},{'name': 'HlmCarouselComponent', 'selector': 'hlm-carousel'},{'name': 'HlmCarouselContentComponent', 'selector': 'hlm-carousel-content'},{'name': 'HlmCarouselItemComponent', 'selector': 'hlm-carousel-item'},{'name': 'HlmCarouselNextComponent', 'selector': 'button[hlm-carousel-next], button[hlmCarouselNext]'},{'name': 'HlmCarouselPreviousComponent', 'selector': 'button[hlm-carousel-previous], button[hlmCarouselPrevious]'},{'name': 'HlmCheckboxCheckIconComponent', 'selector': 'hlm-checkbox-checkicon'},{'name': 'HlmCheckboxComponent', 'selector': 'hlm-checkbox'},{'name': 'HlmCommandInputWrapperComponent', 'selector': 'hlm-cmd-input-wrapper'},{'name': 'HlmCommandShortcutComponent', 'selector': 'hlm-cmd-shortcut'},{'name': 'HlmDialogComponent', 'selector': 'hlm-dialog'},{'name': 'HlmDialogContentComponent', 'selector': 'hlm-dialog-content'},{'name': 'HlmDialogFooterComponent', 'selector': 'hlm-dialog-footer'},{'name': 'HlmDialogHeaderComponent', 'selector': 'hlm-dialog-header'},{'name': 'HlmFormFieldComponent', 'selector': 'hlm-form-field'},{'name': 'HlmHoverCardContentComponent', 'selector': 'hlm-hover-card-content'},{'name': 'HlmIconComponent', 'selector': 'hlm-icon'},{'name': 'HlmMenuBarComponent', 'selector': 'hlm-menu-bar'},{'name': 'HlmMenuComponent', 'selector': 'hlm-menu'},{'name': 'HlmMenuGroupComponent', 'selector': 'hlm-menu-group'},{'name': 'HlmMenuItemCheckComponent', 'selector': 'hlm-menu-item-check'},{'name': 'HlmMenuItemRadioComponent', 'selector': 'hlm-menu-item-radio'},{'name': 'HlmMenuItemSubIndicatorComponent', 'selector': 'hlm-menu-item-sub-indicator'},{'name': 'HlmMenuLabelComponent', 'selector': 'hlm-menu-label'},{'name': 'HlmMenuSeparatorComponent', 'selector': 'hlm-menu-separator'},{'name': 'HlmMenuShortcutComponent', 'selector': 'hlm-menu-shortcut'},{'name': 'HlmPaginationEllipsisComponent', 'selector': 'hlm-pagination-ellipsis'},{'name': 'HlmPaginationNextComponent', 'selector': 'hlm-pagination-next'},{'name': 'HlmPaginationPreviousComponent', 'selector': 'hlm-pagination-previous'},{'name': 'HlmRadioIndicatorComponent', 'selector': 'hlm-radio-indicator'},{'name': 'HlmScrollAreaComponent', 'selector': 'hlm-scroll-area'},{'name': 'HlmSelectOptionComponent', 'selector': 'hlm-option'},{'name': 'HlmSelectScrollDownComponent', 'selector': 'hlm-select-scroll-down'},{'name': 'HlmSelectScrollUpComponent', 'selector': 'hlm-select-scroll-up'},{'name': 'HlmSelectTriggerComponent', 'selector': 'hlm-select-trigger'},{'name': 'HlmSheetComponent', 'selector': 'hlm-sheet'},{'name': 'HlmSheetContentComponent', 'selector': 'hlm-sheet-content'},{'name': 'HlmSheetFooterComponent', 'selector': 'hlm-sheet-footer'},{'name': 'HlmSheetHeaderComponent', 'selector': 'hlm-sheet-header'},{'name': 'HlmSkeletonComponent', 'selector': 'hlm-skeleton'},{'name': 'HlmSpinnerComponent', 'selector': 'hlm-spinner'},{'name': 'HlmSubMenuComponent', 'selector': 'hlm-sub-menu'},{'name': 'HlmSwitchComponent', 'selector': 'hlm-switch'},{'name': 'HlmTableComponent', 'selector': 'hlm-table'},{'name': 'HlmTabsComponent', 'selector': 'hlm-tabs'},{'name': 'HlmTabsListComponent', 'selector': 'hlm-tabs-list'},{'name': 'HlmTabsPaginatedListComponent', 'selector': 'hlm-paginated-tabs-list'},{'name': 'HlmTdComponent', 'selector': 'hlm-td'},{'name': 'HlmThComponent', 'selector': 'hlm-th'},{'name': 'HlmToasterComponent', 'selector': 'hlm-toaster'},{'name': 'HlmToasterComponent', 'selector': 'hlm-toaster'},{'name': 'HlmTooltipComponent', 'selector': 'hlm-tooltip'},{'name': 'HlmTrowComponent', 'selector': 'hlm-trow'},{'name': 'KeywordRatingComponent', 'selector': 'keyword-rating'},{'name': 'KeywordWrapperComponent', 'selector': 'app-keyword-wrapper'},{'name': 'PageNotFoundComponent', 'selector': 'app-page-not-found'},{'name': 'PaperComponent', 'selector': 'app-paper'},{'name': 'SearchComponent', 'selector': 'app-search'}];
+    var DIRECTIVES = [{'name': 'HlmAccordionContentDirective', 'selector': '[hlmAccordionContent],brn-accordion-content [hlm], hlm-accordion-content:not(notHlm)'},{'name': 'HlmAccordionDirective', 'selector': '[hlmAccordion], hlm-accordion'},{'name': 'HlmAccordionIconDirective', 'selector': 'hlm-icon[hlmAccordionIcon], hlm-icon[hlmAccIcon]'},{'name': 'HlmAccordionItemDirective', 'selector': '[hlmAccordionItem],brn-accordion-item[hlm],hlm-accordion-item'},{'name': 'HlmAccordionTriggerDirective', 'selector': '[hlmAccordionTrigger]'},{'name': 'HlmAlertDescriptionDirective', 'selector': '[hlmAlertDesc],[hlmAlertDescription]'},{'name': 'HlmAlertDialogActionButtonDirective', 'selector': 'button[hlmAlertDialogAction]'},{'name': 'HlmAlertDialogCancelButtonDirective', 'selector': 'button[hlmAlertDialogCancel]'},{'name': 'HlmAlertDialogDescriptionDirective', 'selector': '[hlmAlertDialogDescription]'},{'name': 'HlmAlertDialogOverlayDirective', 'selector': '[hlmAlertDialogOverlay],brn-alert-dialog-overlay[hlm]'},{'name': 'HlmAlertDialogTitleDirective', 'selector': '[hlmAlertDialogTitle]'},{'name': 'HlmAlertDirective', 'selector': '[hlmAlert]'},{'name': 'HlmAlertIconDirective', 'selector': '[hlmAlertIcon]'},{'name': 'HlmAlertTitleDirective', 'selector': '[hlmAlertTitle]'},{'name': 'HlmAspectRatioDirective', 'selector': '[hlmAspectRatio]'},{'name': 'HlmAvatarFallbackDirective', 'selector': '[hlmAvatarFallback]'},{'name': 'HlmAvatarImageDirective', 'selector': 'img[hlmAvatarImage]'},{'name': 'HlmBadgeDirective', 'selector': '[hlmBadge]'},{'name': 'HlmBlockquoteDirective', 'selector': '[hlmBlockquote]'},{'name': 'HlmButtonDirective', 'selector': '[hlmBtn]'},{'name': 'HlmCardContentDirective', 'selector': '[hlmCardContent]'},{'name': 'HlmCardDescriptionDirective', 'selector': '[hlmCardDescription]'},{'name': 'HlmCardDirective', 'selector': '[hlmCard]'},{'name': 'HlmCardFooterDirective', 'selector': '[hlmCardFooter]'},{'name': 'HlmCardHeaderDirective', 'selector': '[hlmCardHeader]'},{'name': 'HlmCardTitleDirective', 'selector': '[hlmCardTitle]'},{'name': 'HlmCodeDirective', 'selector': '[hlmCode]'},{'name': 'HlmCommandDialogCloseButtonDirective', 'selector': '[hlmCmdDialogCloseBtn]'},{'name': 'HlmCommandDialogDirective', 'selector': '[hlmCmdDialog]'},{'name': 'HlmCommandDirective', 'selector': 'cmdk-command[hlm],brn-cmd[hlm]'},{'name': 'HlmCommandEmptyDirective', 'selector': '[hlmCmdEmpty]'},{'name': 'HlmCommandGroupDirective', 'selector': 'brn-cmd-group[hlm],cmdk-group[hlm]'},{'name': 'HlmCommandInputDirective', 'selector': '[hlm][brnCmdInput],[hlm][cmdkInput]'},{'name': 'HlmCommandItemDirective', 'selector': '[hlm][brnCmdItem],[hlm][cmdkItem]'},{'name': 'HlmCommandItemIconDirective', 'selector': '[hlmCmdIcon]'},{'name': 'HlmCommandListDirective', 'selector': 'cmdk-list[hlm],brn-cmd-list[hlm]'},{'name': 'HlmCommandLoaderDirective', 'selector': '[hlmCmdLoader]'},{'name': 'HlmCommandSeparatorDirective', 'selector': 'cmdk-separator[hlm],brn-cmd-separator[hlm],[hlmCmdSeparator]'},{'name': 'HlmDialogCloseDirective', 'selector': '[hlmDialogClose],[brnDialogClose][hlm]'},{'name': 'HlmDialogDescriptionDirective', 'selector': '[hlmDialogDescription]'},{'name': 'HlmDialogOverlayDirective', 'selector': '[hlmDialogOverlay],brn-dialog-overlay[hlm]'},{'name': 'HlmDialogTitleDirective', 'selector': '[hlmDialogTitle]'},{'name': 'HlmErrorDirective', 'selector': 'hlm-error'},{'name': 'HlmH1Directive', 'selector': '[hlmH1]'},{'name': 'HlmH2Directive', 'selector': '[hlmH2]'},{'name': 'HlmH3Directive', 'selector': '[hlmH3]'},{'name': 'HlmH4Directive', 'selector': '[hlmH4]'},{'name': 'HlmHintDirective', 'selector': 'hlm-hint'},{'name': 'HlmInputDirective', 'selector': '[hlmInput]'},{'name': 'HlmInputErrorDirective', 'selector': '[hlmInputError]'},{'name': 'HlmLabelDirective', 'selector': '[hlmLabel]'},{'name': 'HlmLargeDirective', 'selector': '[hlmLarge]'},{'name': 'HlmLeadDirective', 'selector': '[hlmLead]'},{'name': 'HlmMenuBarItemDirective', 'selector': '[hlmMenuBarItem]'},{'name': 'HlmMenuItemCheckboxDirective', 'selector': '[hlmMenuItemCheckbox]'},{'name': 'HlmMenuItemDirective', 'selector': '[hlmMenuItem]'},{'name': 'HlmMenuItemIconDirective', 'selector': '[hlmMenuIcon]'},{'name': 'HlmMenuItemRadioDirective', 'selector': '[hlmMenuItemRadio]'},{'name': 'HlmMutedDirective', 'selector': '[hlmMuted]'},{'name': 'HlmPaginationContentDirective', 'selector': '[hlmPaginationContent]'},{'name': 'HlmPaginationDirective', 'selector': '[hlmPagination]'},{'name': 'HlmPaginationItemDirective', 'selector': '[hlmPaginationItem]'},{'name': 'HlmPaginationLinkDirective', 'selector': '[hlmPaginationLink]'},{'name': 'HlmPDirective', 'selector': '[hlmP]'},{'name': 'HlmPopoverCloseDirective', 'selector': '[hlmPopoverClose],[brnPopoverClose][hlm]'},{'name': 'HlmPopoverContentDirective', 'selector': '[hlmPopoverContent],[brnPopoverContent][hlm]'},{'name': 'HlmProgressDirective', 'selector': '[hlmProgress],brn-progress[hlm]'},{'name': 'HlmProgressIndicatorDirective', 'selector': '[hlmProgressIndicator],brn-progress-indicator[hlm]'},{'name': 'HlmRadioDirective', 'selector': 'brn-radio[hlm],[hlmRadio]'},{'name': 'HlmRadioGroupDirective', 'selector': 'brn-radio-group[hlm],[hlmRadioGroup]'},{'name': 'HlmSelectContentDirective', 'selector': '[hlmSelectContent], hlm-select-content'},{'name': 'HlmSelectDirective', 'selector': 'hlm-select, brn-select [hlm]'},{'name': 'HlmSelectGroupDirective', 'selector': '[hlmSelectGroup], hlm-select-group'},{'name': 'HlmSelectLabelDirective', 'selector': '[hlmSelectLabel], hlm-select-label'},{'name': 'HlmSelectValueDirective', 'selector': 'hlm-select-value,[hlmSelectValue], brn-select-value[hlm]'},{'name': 'HlmSeparatorDirective', 'selector': '[hlmSeparator],brn-separator[hlm]'},{'name': 'HlmSheetCloseDirective', 'selector': '[hlmSheetClose],[brnSheetClose][hlm]'},{'name': 'HlmSheetDescriptionDirective', 'selector': '[hlmSheetDescription]'},{'name': 'HlmSheetOverlayDirective', 'selector': '[hlmSheetOverlay],brn-sheet-overlay[hlm]'},{'name': 'HlmSheetTitleDirective', 'selector': '[hlmSheetTitle]'},{'name': 'HlmSmallDirective', 'selector': '[hlmSmall]'},{'name': 'HlmSwitchThumbDirective', 'selector': 'brn-switch-thumb[hlm],[hlmSwitchThumb]'},{'name': 'HlmTableDirective', 'selector': '[hlmTable],brn-table[hlm]'},{'name': 'HlmTabsContentDirective', 'selector': '[hlmTabsContent]'},{'name': 'HlmTabsTriggerDirective', 'selector': '[hlmTabsTrigger]'},{'name': 'HlmToggleDirective', 'selector': '[hlmToggle],[brnToggle][hlm]'},{'name': 'HlmToggleGroupDirective', 'selector': 'brn-toggle-group[hlm],[hlmToggleGroup]'},{'name': 'HlmTooltipTriggerDirective', 'selector': '[hlmTooltipTrigger]'},{'name': 'HlmUlDirective', 'selector': '[hlmUl]'}];
+    var ACTUAL_COMPONENT = {'name': 'HlmCheckboxComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'HlmCheckboxComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

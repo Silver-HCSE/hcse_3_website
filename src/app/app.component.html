@@ -1,34 +1,6 @@
-<app-header />
-<div [style.display]="'flex'" style="height: calc(100% - 48px);">
-  <aside [tuiNavigationAside]="expanded">
-    <header>
-      <button tuiButton routerLink="home">
-        <tui-icon icon="tuiIconHome" />
-      </button>
-    </header>
-    <button tuiButton routerLink="search">
-      <tui-icon icon="tuiIconSearch" />
-    </button>
-    <button tuiButton routerLink="dictionary">
-      <tui-icon icon="tuiIconBook" />
-    </button>
-    <hr />
-    <button iconLeft="tuiIconPlus" tuiButton>
-      Add
-    </button>
-    <footer>
-      <button iconLeft="tuiIconStar" tuiButton>
-        Favorites
-      </button>
-      <button tuiButton [iconLeft]="expanded ? 'tuiIconChevronLeft' : 'tuiIconChevronRight'"
-        (click)="expanded = !expanded">
-        Collapse
-      </button>
-    </footer>
-  </aside>
-  <main tuiNavigationMain class="pt-8" style="height: 100%">
-    <tui-scrollbar style="height: 100%">
-      <router-outlet />
-    </tui-scrollbar>
-  </main>
+<div class="sans">
+  <app-header />
+  <div class="p-10">
+    <router-outlet />
+  </div>
 </div>
