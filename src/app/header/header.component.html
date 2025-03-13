@@ -1,6 +1,27 @@
-<hlm-menu-bar class="w-fit">
+<hlm-menu-bar class="w-full">
   <span hlmMenuBarItem class="font-bold text-lg mx-10">Hallmarks of Cancer Search Engine</span>
   <button hlmMenuBarItem brnMenuItem class="w-32 font-bold" routerLink="home">Home</button>
   <button hlmMenuBarItem brnMenuItem class="w-32 font-bold" routerLink="search">Search</button>
   <button hlmMenuBarItem brnMenuItem class="w-32 font-bold" routerLink="dictionary">Keywords</button>
 </hlm-menu-bar>
+
+<div class="w-full">
+  <div class="p-2 float-left">
+    <nav hlmBreadcrumb>
+      <ol hlmBreadcrumbList>
+          <li hlmBreadcrumbItem>
+              <a hlmBreadcrumbLink href="/">Home</a>
+          </li>
+          @if(pageTitle() != "Home") {
+            <li hlmBreadcrumbSeparator></li>
+            <li hlmBreadcrumbItem>
+                <a hlmBreadcrumbLink hlmL>{{ pageTitle() }}</a>
+            </li>
+          }
+      </ol>
+  </nav>
+</div>
+<div class="float-right p-2">
+  <app-file-state></app-file-state>
+</div>
+</div>

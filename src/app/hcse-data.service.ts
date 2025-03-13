@@ -1,5 +1,5 @@
 import { Injectable, WritableSignal, Signal, signal, computed } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpEventType, HttpParams } from '@angular/common/http';
 import { openDB } from 'idb';
 import { ArticleListItem, HallmarkDescription, KeywordDictionary, KeywordRating, PubmedArticle, RatingFile, RatingIdPair, euclideanDistance, json_to_blob, keyword_ratings_to_dictionary, norm_of_vector, norm_vector, split_input_into_possible_keywords } from './util';
 import { Observable, map } from 'rxjs';
@@ -22,6 +22,8 @@ export class HcseDataService {
   n_articles: Signal<number> = computed(() => this.article_ratings().length);
   n_hallmarks: Signal<number> = computed(() => this.hallmarks().length);
   n_keywords: Signal<number> = computed(() => Object.keys(this.keyword_ratings()).length);
+  rating_file_progress = signal(0);
+  article_file_progress = signal(0);
   average_rating: Signal<number[]> = computed(() => {
     let ret = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     for (const article of this.article_ratings()) {
@@ -70,12 +72,23 @@ export class HcseDataService {
     if (await this.isFileCached(fname)) {
       let data = await this.getCachedFile(fname);
       this.article_ratings.set(JSON.parse(await data.text()));
+      this.article_file_progress.set(100);
       console.log(this.article_ratings().length + " articles found.");
     } else {
-      this.http.get<RatingIdPair[]>('/assets/' + fname).subscribe((data) => {
-        this.article_ratings.set(data);
-        this.cacheFile(fname, json_to_blob(data));
-        console.log(this.article_ratings().length + " articles found.");
+      this.http.get<RatingIdPair[]>('/assets/' + fname, {
+        reportProgress: true,
+        observe: 'events',
+      }).subscribe((event) => {
+        if (event.type === HttpEventType.DownloadProgress) {
+          if (event.total) {
+            this.article_file_progress.set(Math.round((event.loaded / event.total) * 100));
+          }
+        } else if (event.type === HttpEventType.Response) {
+          this.article_ratings.set(event.body || []);
+          this.cacheFile(fname, json_to_blob(event.body));
+          this.article_file_progress.set(100);
+          console.log(this.article_ratings().length + " articles found.");
+        }
       });
     }
   }
@@ -101,12 +114,25 @@ export class HcseDataService {
       this.keyword_ratings.set(keyword_ratings_to_dictionary(obj.rating_output));
       console.log(this.n_keywords() + " keywords found.");
       this.hallmarks.set(this.complete_hallmark_descriptions(obj.hallmarks));
+      this.rating_file_progress.set(100);
       console.log(this.n_hallmarks() + " hallmarks found.");
     } else {
-      this.http.get<RatingFile>('/assets/' + fname).subscribe((data) => {
-        this.keyword_ratings.set(keyword_ratings_to_dictionary(data.rating_output));
-        this.hallmarks.set(this.complete_hallmark_descriptions(data.hallmarks));
-        this.cacheFile(fname, json_to_blob(data));
+      this.http.get<RatingFile>('/assets/' + fname, {
+        reportProgress: true,
+        observe: 'events',
+      }).subscribe((event) => {
+        if (event.type === HttpEventType.DownloadProgress) {
+          if (event.total) {
+            this.rating_file_progress.set(Math.round((event.loaded / event.total) * 100));
+          }
+        } else if (event.type === HttpEventType.Response) {
+          if(event.body) {
+            this.keyword_ratings.set(keyword_ratings_to_dictionary(event.body.rating_output));
+            this.hallmarks.set(this.complete_hallmark_descriptions(event.body.hallmarks));
+            this.cacheFile(fname, json_to_blob(event.body));
+            this.rating_file_progress.set(100);
+          }
+        }
       });
     }
   }
