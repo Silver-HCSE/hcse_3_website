@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HcseDataService } from './hcse-data.service';
 import { CommonModule } from '@angular/common';
-import { KeywordRatingComponent } from './keyword-rating/keyword-rating.component';
-import { HighlightedTextComponent } from './highlighted-text/highlighted-text.component';
 import { HeaderComponent } from './header/header.component';
 import { RouterModule } from '@angular/router';
 
@@ -13,9 +11,8 @@ import { RouterModule } from '@angular/router';
   imports: [
     HeaderComponent,
     CommonModule,
-    RouterModule,
-    HighlightedTextComponent,
-    KeywordRatingComponent],
+    RouterModule
+  ],
   standalone: true,
 })
 export class AppComponent implements OnInit {
