@@ -10,15 +10,14 @@ import {
   HlmAccordionModule,
   HlmAccordionContentComponent,
   HlmAccordionDirective,
-  HlmAccordionIconDirective,
   HlmAccordionItemDirective,
   HlmAccordionTriggerDirective,
 } from '@spartan-ng/ui-accordion-helm';
-import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 
 @Component({
     selector: 'app-search',
-    imports: [CommonModule, FormsModule, PaperComponent, HlmAccordionModule, HlmAccordionDirective, HlmAccordionContentComponent, HlmAccordionIconDirective, HlmAccordionItemDirective, HlmAccordionTriggerDirective, HlmButtonDirective],
+    standalone: true,
+    imports: [CommonModule, FormsModule, PaperComponent, HlmAccordionModule, HlmAccordionDirective, HlmAccordionContentComponent, HlmAccordionItemDirective, HlmAccordionTriggerDirective],
     templateUrl: './search.component.html',
     styleUrl: './search.component.scss'
 })

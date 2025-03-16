@@ -9,6 +9,7 @@ import {
   HlmCardHeaderDirective,
   HlmCardTitleDirective,
 } from '@spartan-ng/ui-card-helm';
+import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,8 @@ import {
     HlmCardDirective,
     HlmCardFooterDirective,
     HlmCardHeaderDirective,
-    HlmCardTitleDirective, ],
+    HlmCardTitleDirective, 
+    HlmButtonDirective],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
