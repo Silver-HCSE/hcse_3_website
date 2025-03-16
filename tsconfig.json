@@ -55,6 +55,9 @@
       ],
       "@spartan-ng/ui-hovercard-helm": [
         "./libs/ui/ui-hovercard-helm/src/index.ts"
+      ],
+      "@spartan-ng/ui-carousel-helm": [
+        "./libs/ui/ui-carousel-helm/src/index.ts"
       ]
     }
   },
