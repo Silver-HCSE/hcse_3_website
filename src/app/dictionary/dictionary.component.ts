@@ -7,11 +7,10 @@ import { KeywordRatingComponent } from '../keyword-rating/keyword-rating.compone
 const MAX_WORDS = 50;
 
 @Component({
-  selector: 'app-dictionary',
-  standalone: true,
-  imports: [FormsModule, KeywordRatingComponent],
-  templateUrl: './dictionary.component.html',
-  styleUrl: './dictionary.component.scss'
+    selector: 'app-dictionary',
+    imports: [FormsModule, KeywordRatingComponent],
+    templateUrl: './dictionary.component.html',
+    styleUrl: './dictionary.component.scss'
 })
 export class DictionaryComponent {
   term: WritableSignal<string> = signal("");

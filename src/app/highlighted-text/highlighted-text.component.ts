@@ -10,11 +10,10 @@ class section {
 }
 
 @Component({
-  selector: 'app-highlighted-text',
-  standalone: true,
-  imports: [RouterModule, HlmBadgeDirective],
-  templateUrl: './highlighted-text.component.html',
-  styleUrl: './highlighted-text.component.scss'
+    selector: 'app-highlighted-text',
+    imports: [RouterModule, HlmBadgeDirective],
+    templateUrl: './highlighted-text.component.html',
+    styleUrl: './highlighted-text.component.scss'
 })
 export class HighlightedTextComponent implements OnChanges {
   @Input() text: string = '';

@@ -5,15 +5,14 @@ import { HeaderComponent } from './header/header.component';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  imports: [
-    HeaderComponent,
-    CommonModule,
-    RouterModule
-  ],
-  standalone: true,
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    imports: [
+        HeaderComponent,
+        CommonModule,
+        RouterModule
+    ]
 })
 export class AppComponent implements OnInit {
   protected open = false;

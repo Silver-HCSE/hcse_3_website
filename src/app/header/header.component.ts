@@ -12,17 +12,16 @@ import {
 import { FileStateComponent } from "../file-state/file-state.component";
 
 @Component({
-  selector: 'app-header',
-  standalone: true,
-  imports: [
-    HlmMenuBarComponent,
-    HlmMenuBarItemDirective,
-    RouterModule,
-    HlmBreadCrumbModule,
-    FileStateComponent
-],
-  templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+    selector: 'app-header',
+    imports: [
+        HlmMenuBarComponent,
+        HlmMenuBarItemDirective,
+        RouterModule,
+        HlmBreadCrumbModule,
+        FileStateComponent
+    ],
+    templateUrl: './header.component.html',
+    styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
   pageTitle = signal('');

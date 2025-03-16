@@ -3,11 +3,10 @@ import { PubmedArticle } from '../util';
 import { HighlightedTextComponent } from '../highlighted-text/highlighted-text.component';
 
 @Component({
-  selector: 'app-paper',
-  standalone: true,
-  imports: [HighlightedTextComponent],
-  templateUrl: './paper.component.html',
-  styleUrl: './paper.component.scss'
+    selector: 'app-paper',
+    imports: [HighlightedTextComponent],
+    templateUrl: './paper.component.html',
+    styleUrl: './paper.component.scss'
 })
 export class PaperComponent {
   @Input() article: PubmedArticle | undefined = undefined;

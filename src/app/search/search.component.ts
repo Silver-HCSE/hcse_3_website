@@ -17,11 +17,10 @@ import {
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 
 @Component({
-  selector: 'app-search',
-  standalone: true,
-  imports: [CommonModule, FormsModule, PaperComponent, HlmAccordionModule, HlmAccordionDirective, HlmAccordionContentComponent, HlmAccordionIconDirective, HlmAccordionItemDirective, HlmAccordionTriggerDirective, HlmButtonDirective],
-  templateUrl: './search.component.html',
-  styleUrl: './search.component.scss'
+    selector: 'app-search',
+    imports: [CommonModule, FormsModule, PaperComponent, HlmAccordionModule, HlmAccordionDirective, HlmAccordionContentComponent, HlmAccordionIconDirective, HlmAccordionItemDirective, HlmAccordionTriggerDirective, HlmButtonDirective],
+    templateUrl: './search.component.html',
+    styleUrl: './search.component.scss'
 })
 export class SearchComponent {
   searchTerm: string = "";

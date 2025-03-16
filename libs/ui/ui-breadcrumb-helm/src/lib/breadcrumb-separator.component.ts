@@ -6,21 +6,20 @@ import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
 import type { ClassValue } from 'clsx';
 
 @Component({
-	// eslint-disable-next-line @angular-eslint/component-selector
-	selector: '[hlmBreadcrumbSeparator]',
-	standalone: true,
-	imports: [NgIcon, HlmIconDirective],
-	providers: [provideIcons({ lucideChevronRight })],
-	host: {
-		role: 'presentation',
-		'[class]': '_computedClass()',
-		'[attr.aria-hidden]': 'true',
-	},
-	template: `
+    // eslint-disable-next-line @angular-eslint/component-selector
+    selector: '[hlmBreadcrumbSeparator]',
+    imports: [NgIcon, HlmIconDirective],
+    providers: [provideIcons({ lucideChevronRight })],
+    host: {
+        role: 'presentation',
+        '[class]': '_computedClass()',
+        '[attr.aria-hidden]': 'true',
+    },
+    template: `
 		<ng-content>
 			<ng-icon size="sm" hlm name="lucideChevronRight" />
 		</ng-content>
-	`,
+	`
 })
 export class HlmBreadcrumbSeparatorComponent {
 	public readonly userClass = input<ClassValue>('', { alias: 'class' });
