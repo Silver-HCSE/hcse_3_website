@@ -7,9 +7,10 @@ import {
   HlmCardDirective,
   HlmCardFooterDirective,
   HlmCardHeaderDirective,
+  HlmCardModule,
   HlmCardTitleDirective,
 } from '@spartan-ng/ui-card-helm';
-import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
+import { HlmButtonModule } from '@spartan-ng/ui-button-helm';
 
 @Component({
   selector: 'app-home',
@@ -17,10 +18,11 @@ import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
   imports: [ HlmCarouselComponent, HlmCarouselContentComponent,HlmCarouselItemComponent,HlmCarouselNextComponent,HlmCarouselPreviousComponent, HlmCardContentDirective,
     HlmCardDescriptionDirective,
     HlmCardDirective,
+    HlmCardModule,
     HlmCardFooterDirective,
     HlmCardHeaderDirective,
     HlmCardTitleDirective, 
-    HlmButtonDirective],
+    HlmButtonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

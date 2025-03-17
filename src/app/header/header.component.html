@@ -7,22 +7,6 @@
 </hlm-menu-bar>
 
 <div class="w-full">
-  <div class="p-2 float-left">
-    <span class="inline-block float-left mr-3">You are here: </span>
-    <nav hlmBreadcrumb>
-      <ol hlmBreadcrumbList>
-        <li hlmBreadcrumbItem>
-          <a hlmBreadcrumbLink href="/">Home</a>
-        </li>
-        @if(pageTitle() != "Home") {
-        <li hlmBreadcrumbSeparator></li>
-        <li hlmBreadcrumbItem>
-          <a hlmBreadcrumbLink hlmL>{{ pageTitle() }}</a>
-        </li>
-        }
-      </ol>
-    </nav>
-  </div>
   <div class="float-right p-2">
     <app-file-state></app-file-state>
   </div>

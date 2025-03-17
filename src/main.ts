@@ -15,6 +15,7 @@ import { HomeComponent } from './app/home/home.component';
 
 const appRoutes: Routes = [
   { path: '', title: "Home", component: HomeComponent },
+  { path: 'home', redirectTo: '' },
   { path: 'hallmarks', title: "Hallmarks", component: HallmarkDescriptionViewComponent },
   { path: 'dictionary', title: "Dictionary", component: DictionaryComponent },
   { path: 'keyword/:word', title: "Keyword Details", component: KeywordWrapperComponent },
