@@ -1,16 +1,21 @@
-@if(article) {
-<p>
-  @for(a of article.authors; track a; let first = $first) {
-  <span class="italic text-grey-700">
-    @if(!first) {
-    ,&nbsp;
+@if (article) {
+  <p>
+    @for (a of article.authors; track a; let first = $first) {
+      <span class="text-grey-700 italic">
+        @if (!first) {
+          ,&nbsp;
+        }
+        {{ a }}</span
+      >
     }
-    {{ a }}</span>
-  }
-</p>
-<app-highlighted-text [text]="article.abstract" />
-<p>
-  <a class="underline" href="http://www.ncbi.nlm.nih.gov/pmc/articles/{{article.id}}/" target="_blank">Read the article
-    on PubMed</a>
-</p>
+  </p>
+  <app-highlighted-text [text]="article.abstract" />
+  <p>
+    <a
+      class="underline"
+      href="http://www.ncbi.nlm.nih.gov/pmc/articles/{{ article.id }}/"
+      target="_blank"
+      >Read the article on PubMed</a
+    >
+  </p>
 }

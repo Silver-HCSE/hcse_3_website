@@ -1,7 +1,9 @@
 @for (s of sections; track s.index) {
-@if (s.is_pure) {
-{{s.content}}
-} @else {
-<a [routerLink]="['/', 'keyword',s.content]"><span hlmBadge>{{ s.content }}</span></a>
-}
+  @if (s.is_pure) {
+    {{ s.content }}
+  } @else {
+    <a [routerLink]="['/', 'keyword', s.content]"
+      ><span hlmBadge>{{ s.content }}</span></a
+    >
+  }
 }

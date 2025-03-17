@@ -1,4 +1,7 @@
-import { importProvidersFrom, provideExperimentalZonelessChangeDetection } from '@angular/core';
+import {
+  importProvidersFrom,
+  provideExperimentalZonelessChangeDetection,
+} from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
 import { provideHttpClient } from '@angular/common/http';
@@ -14,14 +17,22 @@ import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { HomeComponent } from './app/home/home.component';
 
 const appRoutes: Routes = [
-  { path: '', title: "Home", component: HomeComponent },
+  { path: '', title: 'Home', component: HomeComponent },
   { path: 'home', redirectTo: '' },
-  { path: 'hallmarks', title: "Hallmarks", component: HallmarkDescriptionViewComponent },
-  { path: 'dictionary', title: "Dictionary", component: DictionaryComponent },
-  { path: 'keyword/:word', title: "Keyword Details", component: KeywordWrapperComponent },
-  { path: 'search', title: "Search", component: SearchComponent },
-  { path: 'article/:pmc', title: "Article", component: PaperComponent },
-  { path: '**', component: PageNotFoundComponent }
+  {
+    path: 'hallmarks',
+    title: 'Hallmarks',
+    component: HallmarkDescriptionViewComponent,
+  },
+  { path: 'dictionary', title: 'Dictionary', component: DictionaryComponent },
+  {
+    path: 'keyword/:word',
+    title: 'Keyword Details',
+    component: KeywordWrapperComponent,
+  },
+  { path: 'search', title: 'Search', component: SearchComponent },
+  { path: 'article/:pmc', title: 'Article', component: PaperComponent },
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 bootstrapApplication(AppComponent, {
@@ -29,7 +40,7 @@ bootstrapApplication(AppComponent, {
     provideExperimentalZonelessChangeDetection(),
     provideHttpClient(),
     importProvidersFrom([BrowserAnimationsModule]),
-    provideRouter(appRoutes, withComponentInputBinding()), provideCharts(withDefaultRegisterables())
-  ]
-})
-  .catch(err => console.error(err));
+    provideRouter(appRoutes, withComponentInputBinding()),
+    provideCharts(withDefaultRegisterables()),
+  ],
+}).catch((err) => console.error(err));

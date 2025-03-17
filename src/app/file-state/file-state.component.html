@@ -1,20 +1,24 @@
-@if (data_service.article_file_progress() < 100) { 
-    <brn-progress [value]="data_service.article_file_progress()">
-        <brn-progress-indicator hlm />
-    </brn-progress>
-} @else  {
-    <brn-hover-card>
-        <button hlmBadge hlmBtn brnHoverCardTrigger> Article File Downloaded</button>
-        <hlm-hover-card-content *brnHoverCardContent>Number of Articles: {{ data_service.article_ratings().length}} </hlm-hover-card-content>
-    </brn-hover-card>
+@if (data_service.article_file_progress() < 100) {
+  <brn-progress [value]="data_service.article_file_progress()">
+    <brn-progress-indicator hlm />
+  </brn-progress>
+} @else {
+  <brn-hover-card>
+    <button hlmBadge hlmBtn brnHoverCardTrigger>Article File Downloaded</button>
+    <hlm-hover-card-content *brnHoverCardContent
+      >Number of Articles: {{ data_service.article_ratings().length }}
+    </hlm-hover-card-content>
+  </brn-hover-card>
 }
-@if (data_service.rating_file_progress() < 100) { 
-    <brn-progress [value]="data_service.rating_file_progress()">
-        <brn-progress-indicator hlm />
-    </brn-progress>
-} @else  {
-    <brn-hover-card>
-        <button hlmBadge hlmBtn brnHoverCardTrigger> Rating File Downloaded</button>
-        <hlm-hover-card-content *brnHoverCardContent>Number of Keywords: {{ data_service.n_keywords()}} </hlm-hover-card-content>
-      </brn-hover-card>
+@if (data_service.rating_file_progress() < 100) {
+  <brn-progress [value]="data_service.rating_file_progress()">
+    <brn-progress-indicator hlm />
+  </brn-progress>
+} @else {
+  <brn-hover-card>
+    <button hlmBadge hlmBtn brnHoverCardTrigger>Rating File Downloaded</button>
+    <hlm-hover-card-content *brnHoverCardContent
+      >Number of Keywords: {{ data_service.n_keywords() }}
+    </hlm-hover-card-content>
+  </brn-hover-card>
 }

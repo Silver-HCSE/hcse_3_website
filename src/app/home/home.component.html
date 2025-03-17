@@ -1,93 +1,188 @@
-
-<div class="flex items-center justify-center w-full p-4 lg:hidden">
-<hlm-carousel class="w-full  max-w-md">
+<div class="flex w-full items-center justify-center p-4 lg:hidden">
+  <hlm-carousel class="w-full max-w-md">
     <hlm-carousel-content>
       <hlm-carousel-item>
         <div hlmCard>
-            <div hlmCardHeader>
-              <h3 hlmCardTitle>Card Title</h3>
-              <p hlmCardDescription>Card Description</p>
-            </div>
-            <p hlmCardContent>Card Content</p>
-            <p hlmCardFooter>Card Footer</p>
+          <div hlmCardHeader>
+            <h3 hlmCardTitle>Card Title</h3>
+            <p hlmCardDescription>Card Description</p>
           </div>
+          <p hlmCardContent>Card Content</p>
+          <p hlmCardFooter>Card Footer</p>
+        </div>
       </hlm-carousel-item>
       <hlm-carousel-item>
         <div hlmCard>
-            <div hlmCardHeader>
-              <h3 hlmCardTitle>Card Title</h3>
-              <p hlmCardDescription>Card Description</p>
-            </div>
-            <p hlmCardContent>Card Content</p>
-            <p hlmCardFooter>Card Footer</p>
+          <div hlmCardHeader>
+            <h3 hlmCardTitle>Card Title</h3>
+            <p hlmCardDescription>Card Description</p>
           </div>
+          <p hlmCardContent>Card Content</p>
+          <p hlmCardFooter>Card Footer</p>
+        </div>
       </hlm-carousel-item>
       <hlm-carousel-item>
         <div hlmCard>
-            <div hlmCardHeader>
-              <h3 hlmCardTitle>Card Title</h3>
-              <p hlmCardDescription>Card Description</p>
-            </div>
-            <p hlmCardContent>Card Content</p>
-            <p hlmCardFooter>Card Footer</p>
+          <div hlmCardHeader>
+            <h3 hlmCardTitle>Card Title</h3>
+            <p hlmCardDescription>Card Description</p>
           </div>
+          <p hlmCardContent>Card Content</p>
+          <p hlmCardFooter>Card Footer</p>
+        </div>
       </hlm-carousel-item>
       <hlm-carousel-item>
         <div hlmCard>
-            <div hlmCardHeader>
-              <h3 hlmCardTitle>Card Title</h3>
-              <p hlmCardDescription>Card Description</p>
-            </div>
-            <p hlmCardContent>Card Content</p>
-            <p hlmCardFooter>Card Footer</p>
+          <div hlmCardHeader>
+            <h3 hlmCardTitle>Card Title</h3>
+            <p hlmCardDescription>Card Description</p>
           </div>
+          <p hlmCardContent>Card Content</p>
+          <p hlmCardFooter>Card Footer</p>
+        </div>
       </hlm-carousel-item>
       <hlm-carousel-item>
         <div hlmCard>
-            <div hlmCardHeader>
-              <h3 hlmCardTitle>Card Title</h3>
-              <p hlmCardDescription>Card Description</p>
-            </div>
-            <p hlmCardContent>Card Content</p>
-            <p hlmCardFooter>Card Footer</p>
+          <div hlmCardHeader>
+            <h3 hlmCardTitle>Card Title</h3>
+            <p hlmCardDescription>Card Description</p>
           </div>
+          <p hlmCardContent>Card Content</p>
+          <p hlmCardFooter>Card Footer</p>
+        </div>
       </hlm-carousel-item>
     </hlm-carousel-content>
-    <button hlm-carousel-previous></button>
-    <button hlm-carousel-next></button>
+    <button hlm-carousel-previous><p class="hidden">Previous</p></button>
+    <button hlm-carousel-next><p class="hidden">Next</p></button>
   </hlm-carousel>
 </div>
-<div class="hidden flex row w-full gap-4 p-4 lg:flex perspective-[1000px]">
-  <div hlmCard class="w-96 flex flex-col bg-white shadow-md rounded-2xl p-4 transition-transform duration-500 ease-in-out group hover:rotate-x-2 hover:rotate-y-1 hover:shadow-xl">
-        <div hlmCardHeader>
-          <h3 hlmCardTitle>Part 0</h3>
-          <p hlmCardDescription>Motivation and Tech Stack</p>
-        </div>
-        <div hlmCardContent class="flex-grow">In the first video, we discuss basic information around this project: What we'll be doing, why and how. For me, it's also an introduction to video making :)</div>
-        <div hlmCardFooter class="flex place-content-between"><button hlmBtn variant="outline" href="https://youtube.com" target="_blank" class="h-auto">Watch the video!</button><button hlmBtn variant="secondary" href="https://youtube.com" target="_blank" class=" h-auto">Read the article.</button></div>
+<div class="row flex hidden w-full gap-4 p-4 perspective-[1000px] lg:flex">
+  <div
+    hlmCard
+    class="group flex w-96 flex-col rounded-2xl bg-white p-4 shadow-md transition-transform duration-500 ease-in-out hover:rotate-x-2 hover:rotate-y-1 hover:shadow-xl"
+  >
+    <div hlmCardHeader>
+      <h3 hlmCardTitle>Part 0</h3>
+      <p hlmCardDescription>Motivation and Tech Stack</p>
     </div>
-    <div hlmCard class="w-96 flex flex-col bg-white shadow-md rounded-2xl p-4 transition-transform duration-500 ease-in-out group hover:rotate-x-2 hover:rotate-y-1 hover:shadow-xl">
-        <div hlmCardHeader>
-          <h3 hlmCardTitle>Part 1</h3>
-          <p hlmCardDescription>The Algorithm and Getting the Data</p>
-        </div>
-        <div hlmCardContent class="flex-grow">This time, we discuss where we get our data, start working with Rust and discuss some basic principles in working with large datasets.</div>
-        <div hlmCardFooter class="flex place-content-between"><button hlmBtn variant="outline" href="https://youtube.com" target="_blank" class="h-auto">Watch the video!</button><button hlmBtn variant="secondary" href="https://youtube.com" target="_blank" class=" h-auto">Read the article.</button></div>
+    <div hlmCardContent class="flex-grow">
+      In the first video, we discuss basic information around this project: What we'll
+      be doing, why and how. For me, it's also an introduction to video making :)
     </div>
-    <div hlmCard class="w-96 flex flex-col bg-white shadow-md rounded-2xl p-4 transition-transform duration-500 ease-in-out group hover:rotate-x-2 hover:rotate-y-1 hover:shadow-xl">
-        <div hlmCardHeader>
-          <h3 hlmCardTitle>Part 2</h3>
-          <p hlmCardDescription>Preparing the Data</p>
-        </div>
-        <div hlmCardContent class="flex-grow">Now that we have downloaded all we need, we start processing it and preparing it in a format which we can use for our website.</div>
-        <div hlmCardFooter class="flex place-content-between"><button hlmBtn variant="outline" href="https://youtube.com" target="_blank" class="h-auto">Watch the video!</button><button hlmBtn variant="secondary" href="https://youtube.com" target="_blank" class=" h-auto">Read the article.</button></div>
+    <div hlmCardFooter class="flex place-content-between">
+      <button
+        hlmBtn
+        variant="outline"
+        href="https://youtube.com"
+        target="_blank"
+        class="h-auto"
+      >
+        Watch the video!</button
+      ><button
+        hlmBtn
+        variant="secondary"
+        href="https://youtube.com"
+        target="_blank"
+        class="h-auto"
+      >
+        Read the article.
+      </button>
     </div>
-    <div hlmCard class="w-96 flex flex-col bg-white shadow-md rounded-2xl p-4 transition-transform duration-500 ease-in-out group hover:rotate-x-2 hover:rotate-y-1 hover:shadow-xl">
-        <div hlmCardHeader>
-          <h3 hlmCardTitle>Part 3</h3>
-          <p hlmCardDescription>The Website!</p>
-        </div>
-        <div hlmCardContent class="flex-grow">In this part, we discuss how to visualize the data we have generated as a website and how to provide search functionality.</div>
-        <div hlmCardFooter class="flex place-content-between"><button hlmBtn variant="outline" href="https://youtube.com" target="_blank" class="h-auto">Watch the video!</button><button hlmBtn variant="secondary" href="https://youtube.com" target="_blank" class=" h-auto">Read the article.</button></div>
+  </div>
+  <div
+    hlmCard
+    class="group flex w-96 flex-col rounded-2xl bg-white p-4 shadow-md transition-transform duration-500 ease-in-out hover:rotate-x-2 hover:rotate-y-1 hover:shadow-xl"
+  >
+    <div hlmCardHeader>
+      <h3 hlmCardTitle>Part 1</h3>
+      <p hlmCardDescription>The Algorithm and Getting the Data</p>
     </div>
+    <div hlmCardContent class="flex-grow">
+      This time, we discuss where we get our data, start working with Rust and discuss
+      some basic principles in working with large datasets.
+    </div>
+    <div hlmCardFooter class="flex place-content-between">
+      <button
+        hlmBtn
+        variant="outline"
+        href="https://youtube.com"
+        target="_blank"
+        class="h-auto"
+      >
+        Watch the video!</button
+      ><button
+        hlmBtn
+        variant="secondary"
+        href="https://youtube.com"
+        target="_blank"
+        class="h-auto"
+      >
+        Read the article.
+      </button>
+    </div>
+  </div>
+  <div
+    hlmCard
+    class="group flex w-96 flex-col rounded-2xl bg-white p-4 shadow-md transition-transform duration-500 ease-in-out hover:rotate-x-2 hover:rotate-y-1 hover:shadow-xl"
+  >
+    <div hlmCardHeader>
+      <h3 hlmCardTitle>Part 2</h3>
+      <p hlmCardDescription>Preparing the Data</p>
+    </div>
+    <div hlmCardContent class="flex-grow">
+      Now that we have downloaded all we need, we start processing it and preparing it
+      in a format which we can use for our website.
+    </div>
+    <div hlmCardFooter class="flex place-content-between">
+      <button
+        hlmBtn
+        variant="outline"
+        href="https://youtube.com"
+        target="_blank"
+        class="h-auto"
+      >
+        Watch the video!</button
+      ><button
+        hlmBtn
+        variant="secondary"
+        href="https://youtube.com"
+        target="_blank"
+        class="h-auto"
+      >
+        Read the article.
+      </button>
+    </div>
+  </div>
+  <div
+    hlmCard
+    class="group flex w-96 flex-col rounded-2xl bg-white p-4 shadow-md transition-transform duration-500 ease-in-out hover:rotate-x-2 hover:rotate-y-1 hover:shadow-xl"
+  >
+    <div hlmCardHeader>
+      <h3 hlmCardTitle>Part 3</h3>
+      <p hlmCardDescription>The Website!</p>
+    </div>
+    <div hlmCardContent class="flex-grow">
+      In this part, we discuss how to visualize the data we have generated as a website
+      and how to provide search functionality.
+    </div>
+    <div hlmCardFooter class="flex place-content-between">
+      <button
+        hlmBtn
+        variant="outline"
+        href="https://youtube.com"
+        target="_blank"
+        class="h-auto"
+      >
+        Watch the video!</button
+      ><button
+        hlmBtn
+        variant="secondary"
+        href="https://youtube.com"
+        target="_blank"
+        class="h-auto"
+      >
+        Read the article.
+      </button>
+    </div>
+  </div>
 </div>

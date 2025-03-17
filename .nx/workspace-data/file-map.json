@@ -101,27 +101,21 @@
     "@spartan-ng/ui-button-helm": [
       "./src/components/ui-button-helm/src/index.ts"
     ],
-    "@spartan-ng/ui-card-helm": [
-      "./src/components/ui-card-helm/src/index.ts"
-    ],
+    "@spartan-ng/ui-card-helm": ["./src/components/ui-card-helm/src/index.ts"],
     "@spartan-ng/ui-command-helm": [
       "./src/components/ui-command-helm/src/index.ts"
     ],
     "@spartan-ng/ui-dialog-helm": [
       "./src/components/ui-dialog-helm/src/index.ts"
     ],
-    "@spartan-ng/ui-icon-helm": [
-      "./src/components/ui-icon-helm/src/index.ts"
-    ],
+    "@spartan-ng/ui-icon-helm": ["./src/components/ui-icon-helm/src/index.ts"],
     "@spartan-ng/ui-input-helm": [
       "./src/components/ui-input-helm/src/index.ts"
     ],
     "@spartan-ng/ui-label-helm": [
       "./src/components/ui-label-helm/src/index.ts"
     ],
-    "@spartan-ng/ui-menu-helm": [
-      "./src/components/ui-menu-helm/src/index.ts"
-    ],
+    "@spartan-ng/ui-menu-helm": ["./src/components/ui-menu-helm/src/index.ts"],
     "@spartan-ng/ui-popover-helm": [
       "./src/components/ui-popover-helm/src/index.ts"
     ],
@@ -149,9 +143,7 @@
     "@spartan-ng/ui-switch-helm": [
       "./src/components/ui-switch-helm/src/index.ts"
     ],
-    "@spartan-ng/ui-tabs-helm": [
-      "./src/components/ui-tabs-helm/src/index.ts"
-    ],
+    "@spartan-ng/ui-tabs-helm": ["./src/components/ui-tabs-helm/src/index.ts"],
     "@spartan-ng/ui-toggle-helm": [
       "./src/components/ui-toggle-helm/src/index.ts"
     ],
@@ -182,9 +174,7 @@
     "@spartan-ng/ui-sonner-helm": [
       "./src/components/ui-sonner-helm/src/index.ts"
     ],
-    "@spartan-ng/ui-helm-helm": [
-      "./src/components/ui-helm-helm/src/index.ts"
-    ],
+    "@spartan-ng/ui-helm-helm": ["./src/components/ui-helm-helm/src/index.ts"],
     "@spartan-ng/ui-formfield-helm": [
       "./src/components/ui-formfield-helm/src/index.ts"
     ]

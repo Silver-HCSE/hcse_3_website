@@ -1,25 +1,49 @@
-<div class="mt-10 max-w-md mx-auto">
-  <span class="text-lg m-20 font-bold">Keyword Ratings</span>
-  <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Keyword</label>
+<div class="mx-auto mt-10 max-w-md">
+  <span class="m-20 text-lg font-bold">Keyword Ratings</span>
+  <label
+    for="default-search"
+    class="sr-only mb-2 text-sm font-medium text-gray-900 dark:text-white"
+    >Keyword</label
+  >
   <div class="relative">
-    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-      <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-        fill="none" viewBox="0 0 20 20">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+    <div class="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3">
+      <svg
+        class="h-4 w-4 text-gray-500 dark:text-gray-400"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 20 20"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+        />
       </svg>
     </div>
-    <input type="search" id="default-search"
-      class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-      placeholder="Search Mockups, Logos..." [(ngModel)]="term" />
+    <input
+      type="search"
+      id="default-search"
+      class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-4 ps-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+      placeholder="Search Mockups, Logos..."
+      [(ngModel)]="term"
+    />
   </div>
 </div>
 <div class="p-10">
-  <b>Found {{count_string()}} results.</b>
+  <b>Found {{ count_string() }} results.</b>
   <br />
-  @if(data.hallmark_names().length > 0) {
-    @for(word of keywords(); track word) {
-      <div><keyword-rating [hallmark_names]="data.hallmark_names()" [keyword]="word.keyword" [rating]="word.rating" /></div>
+  @if (data.hallmark_names().length > 0) {
+    @for (word of keywords(); track word) {
+      <div>
+        <app-keyword-rating
+          [hallmark_names]="data.hallmark_names()"
+          [keyword]="word.keyword"
+          [rating]="word.rating"
+        />
+      </div>
       <br />
     }
   }

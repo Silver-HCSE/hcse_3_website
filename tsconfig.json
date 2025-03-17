@@ -18,26 +18,17 @@
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
-    "lib": [
-      "ES2022",
-      "dom"
-    ],
+    "lib": ["ES2022", "dom"],
     "paths": {
       "@spartan-ng/ui-accordion-helm": [
         "./libs/ui/ui-accordion-helm/src/index.ts"
       ],
-      "@spartan-ng/ui-badge-helm": [
-        "./libs/ui/ui-badge-helm/src/index.ts"
-      ],
+      "@spartan-ng/ui-badge-helm": ["./libs/ui/ui-badge-helm/src/index.ts"],
       "@spartan-ng/ui-breadcrumb-helm": [
         "./libs/ui/ui-breadcrumb-helm/src/index.ts"
       ],
-      "@spartan-ng/ui-button-helm": [
-        "./libs/ui/ui-button-helm/src/index.ts"
-      ],
-      "@spartan-ng/ui-card-helm": [
-        "./libs/ui/ui-card-helm/src/index.ts"
-      ],
+      "@spartan-ng/ui-button-helm": ["./libs/ui/ui-button-helm/src/index.ts"],
+      "@spartan-ng/ui-card-helm": ["./libs/ui/ui-card-helm/src/index.ts"],
       "@spartan-ng/ui-carousel-helm": [
         "./libs/ui/ui-carousel-helm/src/index.ts"
       ],
@@ -47,15 +38,9 @@
       "@spartan-ng/ui-hovercard-helm": [
         "./libs/ui/ui-hovercard-helm/src/index.ts"
       ],
-      "@spartan-ng/ui-icon-helm": [
-        "./libs/ui/ui-icon-helm/src/index.ts"
-      ],
-      "@spartan-ng/ui-input-helm": [
-        "./libs/ui/ui-input-helm/src/index.ts"
-      ],
-      "@spartan-ng/ui-menu-helm": [
-        "./libs/ui/ui-menu-helm/src/index.ts"
-      ],
+      "@spartan-ng/ui-icon-helm": ["./libs/ui/ui-icon-helm/src/index.ts"],
+      "@spartan-ng/ui-input-helm": ["./libs/ui/ui-input-helm/src/index.ts"],
+      "@spartan-ng/ui-menu-helm": ["./libs/ui/ui-menu-helm/src/index.ts"],
       "@spartan-ng/ui-progress-helm": [
         "./libs/ui/ui-progress-helm/src/index.ts"
       ]

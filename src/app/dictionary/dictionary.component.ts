@@ -7,24 +7,22 @@ import { KeywordRatingComponent } from '../keyword-rating/keyword-rating.compone
 const MAX_WORDS = 50;
 
 @Component({
-    selector: 'app-dictionary',
-    imports: [FormsModule, KeywordRatingComponent],
-    templateUrl: './dictionary.component.html',
-    styleUrl: './dictionary.component.scss'
+  selector: 'app-dictionary',
+  imports: [FormsModule, KeywordRatingComponent],
+  templateUrl: './dictionary.component.html',
+  styleUrl: './dictionary.component.scss',
 })
 export class DictionaryComponent {
-  term: WritableSignal<string> = signal("");
+  term: WritableSignal<string> = signal('');
   keywords: Signal<KeywordRating[]> = computed(() => {
-    let ret: KeywordRating[] = [];
-    let results: number = 0;
-    for (let key in this.data.keyword_ratings()) {
+    const ret: KeywordRating[] = [];
+    for (const key in this.data.keyword_ratings()) {
       if (key.indexOf(this.term()) != -1) {
         const new_item: KeywordRating = {
           keyword: key,
-          rating: this.data.keyword_ratings()[key]
-        }
+          rating: this.data.keyword_ratings()[key],
+        };
         ret.push(new_item);
-        results++;
       }
     }
     ret.sort((a, b) => {
@@ -43,7 +41,7 @@ export class DictionaryComponent {
   count_string: Signal<string> = computed(() => {
     let ret: string = this.count().toString();
     if (this.count() == MAX_WORDS) {
-      ret += "+";
+      ret += '+';
     }
     return ret;
   });
@@ -53,5 +51,4 @@ export class DictionaryComponent {
   constructor(public data: HcseDataService) {
     this.hallmark_names = data.hallmark_names();
   }
-
 }

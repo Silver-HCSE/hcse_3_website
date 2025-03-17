@@ -3,17 +3,15 @@ import { ChartData, ChartEvent, ChartType, ChartOptions } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 
 @Component({
-    selector: 'keyword-rating',
-    imports: [
-        BaseChartDirective
-    ],
-    templateUrl: './keyword-rating.component.html',
-    styleUrl: './keyword-rating.component.scss'
+  selector: 'app-keyword-rating',
+  imports: [BaseChartDirective],
+  templateUrl: './keyword-rating.component.html',
+  styleUrl: './keyword-rating.component.scss',
 })
 export class KeywordRatingComponent implements OnInit {
   @Input() rating: number[] = [];
   @Input() hallmark_names: string[] = [];
-  @Input() keyword: string = "";
+  @Input() keyword = '';
 
   public doughnutChartData: ChartData<'doughnut'> = {
     datasets: [],
@@ -24,18 +22,15 @@ export class KeywordRatingComponent implements OnInit {
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        position: "right",
-      }
-    }
+        position: 'right',
+      },
+    },
   };
 
   ngOnInit() {
     this.doughnutChartData = {
-
       labels: this.hallmark_names,
-      datasets: [
-        { data: this.rating },
-      ],
+      datasets: [{ data: this.rating }],
     };
   }
   public doughnutChartType: ChartType = 'doughnut';
@@ -59,5 +54,4 @@ export class KeywordRatingComponent implements OnInit {
   }): void {
     console.log(event, active);
   }
-
 }

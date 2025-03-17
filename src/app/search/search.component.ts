@@ -15,14 +15,23 @@ import {
 } from '@spartan-ng/ui-accordion-helm';
 
 @Component({
-    selector: 'app-search',
-    standalone: true,
-    imports: [CommonModule, FormsModule, PaperComponent, HlmAccordionModule, HlmAccordionDirective, HlmAccordionContentComponent, HlmAccordionItemDirective, HlmAccordionTriggerDirective],
-    templateUrl: './search.component.html',
-    styleUrl: './search.component.scss'
+  selector: 'app-search',
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    PaperComponent,
+    HlmAccordionModule,
+    HlmAccordionDirective,
+    HlmAccordionContentComponent,
+    HlmAccordionItemDirective,
+    HlmAccordionTriggerDirective,
+  ],
+  templateUrl: './search.component.html',
+  styleUrl: './search.component.scss',
 })
 export class SearchComponent {
-  searchTerm: string = "";
+  searchTerm = '';
   results: ArticleListCollection;
   articles: Observable<PubmedArticle[]> | null = null;
   page = 0;
@@ -43,12 +52,14 @@ export class SearchComponent {
   }
 
   public load_article_page() {
-    console.log("Loading articles");
-    this.articles = this.data_service.fetchArticles(this.results.get_page(this.page).map((article) => article.id));
+    console.log('Loading articles');
+    this.articles = this.data_service.fetchArticles(
+      this.results.get_page(this.page).map((article) => article.id),
+    );
   }
 
   public can_go_to_next_page() {
-    return this.results.get_page(this.page + 1).length > 0
+    return this.results.get_page(this.page + 1).length > 0;
   }
 
   public nextPage() {

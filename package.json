@@ -1,13 +1,16 @@
 {
   "name": "hcse-website",
-  "version": "0.0.0",
+  "version": "0.8.0",
+  "type": "module",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "compodoc": "npx compodoc -p tsconfig.doc.json --serve"
+    "compodoc": "npx compodoc -p tsconfig.doc.json --serve",
+    "lint": "ng lint",
+    "lf": "ng lint --fix"
   },
   "private": true,
   "dependencies": {
@@ -48,7 +51,11 @@
     "@spartan-ng/ui-core": "0.0.1-alpha.380",
     "@types/dompurify": "3.0.5",
     "@types/jasmine": "~4.3.6",
+    "angular-eslint": "19.2.1",
     "autoprefixer": "^10.4.21",
+    "eslint": "^9.22.0",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-plugin-prettier": "^5.2.3",
     "jasmine-core": "~4.6.1",
     "karma": "~6.4.4",
     "karma-chrome-launcher": "~3.2.0",
@@ -56,10 +63,14 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "postcss": "^8.5.3",
+    "prettier": "^3.5.3",
+    "prettier-eslint": "^16.3.0",
+    "prettier-plugin-tailwindcss": "^0.6.11",
     "tailwind-merge": "^2.6.0",
     "tailwindcss": "^4.0.14",
     "tailwindcss-animate": "^1.0.7",
-    "typescript": "~5.8.2"
+    "typescript": "~5.8.2",
+    "typescript-eslint": "8.26.0"
   },
   "packageManager": "pnpm@9.14.2+sha512.6e2baf77d06b9362294152c851c4f278ede37ab1eba3a55fda317a4a17b209f4dbb973fb250a77abc463a341fcb1f17f17cfa24091c4eb319cda0d9b84278387"
 }

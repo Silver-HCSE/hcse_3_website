@@ -1,7 +1,12 @@
-<div class=" display-block text-center">
-  <div class="test-center w-full font-semibold mb-1">{{keyword}}</div>
-    <div class="h-60 w-full">
-    <canvas baseChart [data]="doughnutChartData" [type]="doughnutChartType" [options]="doughnutChartOptions">
+<div class="display-block text-center">
+  <div class="test-center mb-1 w-full font-semibold">{{ keyword }}</div>
+  <div class="h-60 w-full">
+    <canvas
+      baseChart
+      [data]="doughnutChartData"
+      [type]="doughnutChartType"
+      [options]="doughnutChartOptions"
+    >
     </canvas>
-    </div>
+  </div>
 </div>

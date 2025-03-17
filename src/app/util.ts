@@ -8,13 +8,13 @@ export interface PubmedArticle {
 }
 
 export class ArticleListItem {
-  id: string = "";
+  id = '';
   rating: number[] = [];
   distance?: number;
 }
 
 export class RatingIdPair {
-  public i: string = "";
+  public i = '';
   public r: number[] = [];
 }
 
@@ -24,12 +24,12 @@ export class RatingFile {
 }
 
 export class HallmarkDescription {
-  public title: string = "";
-  public h: number = 0;
-  public s: number = 0;
-  public l: number = 0;
-  public hsl_string: string = "hsl(0, 0%, 0%)";
-  public description: string = "";
+  public title = '';
+  public h = 0;
+  public s = 0;
+  public l = 0;
+  public hsl_string = 'hsl(0, 0%, 0%)';
+  public description = '';
   public keywords: string[] = [];
 }
 
@@ -38,7 +38,7 @@ export class KeywordDictionary {
 }
 
 export class KeywordRating {
-  public keyword: string = "";
+  public keyword = '';
   public rating: number[] = [];
 }
 
@@ -53,10 +53,16 @@ export function euclideanDistance(vec1: number[], vec2: number[]): number {
   return Math.sqrt(sum);
 }
 
-export function split_input_into_possible_keywords(text: string, deduplicate: boolean = true): string[] {
-  let cleared = text.replace(/[.?,;()!'"%=\/\\-]/g, ' ');
+export function split_input_into_possible_keywords(
+  text: string,
+  deduplicate = true,
+): string[] {
+  let cleared = text.replace(/[.?,;()!'"%=/\\-]/g, ' ');
   cleared = cleared.toLowerCase();
-  let words = cleared.split(/\s+/).map(word => remove_leading_and_trailing_hyphens(word)).filter(word => word.length > 4);
+  let words = cleared
+    .split(/\s+/)
+    .map((word) => remove_leading_and_trailing_hyphens(word))
+    .filter((word) => word.length > 4);
   words = words.map((w) => w.trim());
   words.sort();
   if (deduplicate) {
@@ -86,15 +92,17 @@ export function remove_leading_and_trailing_hyphens(keyword: string): string {
   return ret;
 }
 
-export function json_to_blob(data: any): Blob {
+export function json_to_blob(data: object | null): Blob {
   const str = JSON.stringify(data);
   const bytes = new TextEncoder().encode(str);
-  const blob = new Blob([bytes], { type: "application/json;charset=utf-8" });
+  const blob = new Blob([bytes], { type: 'application/json;charset=utf-8' });
   return blob;
 }
 
-export function keyword_ratings_to_dictionary(input: KeywordRating[]): KeywordDictionary {
-  let ret: KeywordDictionary = {};
+export function keyword_ratings_to_dictionary(
+  input: KeywordRating[],
+): KeywordDictionary {
+  const ret: KeywordDictionary = {};
   input.forEach((k) => {
     ret[k.keyword.trim()] = k.rating;
   });
@@ -103,7 +111,7 @@ export function keyword_ratings_to_dictionary(input: KeywordRating[]): KeywordDi
 
 export function norm_of_vector(input: number[]): number {
   let ret = 0;
-  input.forEach(i => {
+  input.forEach((i) => {
     ret += i;
   });
   return ret;
@@ -112,7 +120,7 @@ export function norm_of_vector(input: number[]): number {
 export function norm_vector(input_vector: number[]): number[] {
   const norm = norm_of_vector(input_vector);
   if (norm > 0) {
-    return input_vector.map(i => i / norm);
+    return input_vector.map((i) => i / norm);
   } else {
     return input_vector;
   }

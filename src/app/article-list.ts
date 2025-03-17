@@ -1,21 +1,20 @@
-import { ArticleListItem } from "./util";
+import { ArticleListItem } from './util';
 
 const ARTICLE_LIST_CUTOFF_COUNT = 100;
 const TEMPORARY_OVERFLOW_LIMIT = 10;
 
 export class ArticleListCollection {
-
   public articles: ArticleListItem[] = [];
-  private distance_cutoff: number = 1;
+  private distance_cutoff = 1;
   public size = 0;
 
   add(article: ArticleListItem) {
     if (!article.distance) {
-      return
+      return;
     }
     if (this.articles.length > ARTICLE_LIST_CUTOFF_COUNT) {
       if (article.distance > this.distance_cutoff) {
-        return
+        return;
       }
     }
     this.binaryInsert(article);
@@ -34,13 +33,13 @@ export class ArticleListCollection {
     this.distance_cutoff = this.articles[ARTICLE_LIST_CUTOFF_COUNT - 1].distance!;
   }
 
-  get_page(page: number, page_size: number = 10) {
+  get_page(page: number, page_size = 10) {
     return this.articles.slice(page * page_size, (page + 1) * page_size);
   }
 
   binaryInsert(item: ArticleListItem): void {
     if (!item.distance) {
-      return
+      return;
     }
     let left = 0;
     let right = this.articles.length - 1;
