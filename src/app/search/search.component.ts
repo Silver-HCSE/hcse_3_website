@@ -13,6 +13,8 @@ import {
   HlmAccordionItemDirective,
   HlmAccordionTriggerDirective,
 } from '@spartan-ng/ui-accordion-helm';
+import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
+import { HlmButtonModule } from '@spartan-ng/ui-button-helm';
 
 @Component({
   selector: 'app-search',
@@ -26,6 +28,8 @@ import {
     HlmAccordionContentComponent,
     HlmAccordionItemDirective,
     HlmAccordionTriggerDirective,
+    HlmInputDirective,
+    HlmButtonModule
   ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
